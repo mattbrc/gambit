@@ -1,6 +1,11 @@
 ## Gambit Health
 
-Built as part of buildspace n+w s2.
+Built as part of buildspace n+w s2 with:
+
+- Nextjs
+- React / Daisy UI
+- Tailwindcss
+- Supabase
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
