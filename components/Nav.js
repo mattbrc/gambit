@@ -4,7 +4,6 @@ import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 const Nav = () => {
   const user = useUser();
-  console.log("user: ", user);
   const supabase = useSupabaseClient();
 
   return (
