@@ -1,6 +1,6 @@
 import { useSession } from "@supabase/auth-helpers-react";
 
-export default function Insights() {
+export default function Workouts() {
   const session = useSession();
 
   return (
@@ -14,7 +14,12 @@ export default function Insights() {
         </div>
       ) : (
         <div className="container text-center">
-          <h1 className="my-5 text-xl font-bold">Insights Coming Soon!</h1>
+          <h1 className="my-5 text-xl font-bold">Workout Page Coming Soon!</h1>
+          <p>
+            This page will store all the user workout history in individual
+            pages
+          </p>
+          <p>Button links to each workout w/ date created</p>
         </div>
       )}
     </div>
