@@ -132,7 +132,9 @@ export default function Account({ session }) {
               value={experience}
               onChange={(e) => setExperience(e.target.value)}
             >
-              <option disabled>Pick one</option>
+              <option disabled selected>
+                Pick one
+              </option>
               <option value="Brand New">Brand New</option>
               <option value="Beginner">Beginner</option>
               <option value="Intermediate">Intermediate</option>
@@ -148,7 +150,9 @@ export default function Account({ session }) {
               value={age_range}
               onChange={(e) => setAge_range(e.target.value)}
             >
-              <option disabled>Pick one</option>
+              <option disabled selected>
+                Pick one
+              </option>
               <option value="18-21">18-21</option>
               <option value="22-26">22-26</option>
               <option value="27-35">27-35</option>
@@ -193,7 +197,9 @@ export default function Account({ session }) {
               value={goals}
               onChange={(e) => setGoals(e.target.value)}
             >
-              <option disabled>Pick one</option>
+              <option disabled selected>
+                Pick one
+              </option>
               <option value="Improved Long Distance Endurance">
                 Improved Long Distance Endurance
               </option>
@@ -215,7 +221,9 @@ export default function Account({ session }) {
               value={weight_goals}
               onChange={(e) => setWeight_goals(e.target.value)}
             >
-              <option disabled>Pick one</option>
+              <option disabled selected>
+                Pick one
+              </option>
               <option value="Weight Loss / Recomposition">
                 Weight Loss / Recomposition
               </option>
@@ -236,7 +244,9 @@ export default function Account({ session }) {
               value={days_per_week}
               onChange={(e) => setDays_per_week(e.target.value)}
             >
-              <option disabled>Pick one</option>
+              <option disabled selected>
+                Pick one
+              </option>
               <option value="2">2</option>
               <option value="3">3</option>
               <option value="4">4</option>
@@ -255,7 +265,9 @@ export default function Account({ session }) {
               value={time_per_workout}
               onChange={(e) => setTime_per_workout(e.target.value)}
             >
-              <option disabled>Pick one</option>
+              <option disabled selected>
+                Pick one
+              </option>
               <option value="30 min or less">30 min or less</option>
               <option value="30 - 45 min">30 - 45 min</option>
               <option value="45 - 60 min">45 - 60 min</option>
@@ -273,7 +285,9 @@ export default function Account({ session }) {
               value={gym_type}
               onChange={(e) => setGym_type(e.target.value)}
             >
-              <option disabled>Pick one</option>
+              <option disabled selected>
+                Pick one
+              </option>
               <option value="Crossfit Style">Crossfit Style</option>
               <option value="Military Gym">Military Gym</option>
               <option value="Barbells / Dumbbells Only">
