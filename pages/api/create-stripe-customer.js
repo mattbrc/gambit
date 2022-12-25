@@ -1,7 +1,9 @@
 import initStripe from "stripe";
-import { supabase } from "../../utils/supabase";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 const handler = async (req, res) => {
+  const supabase = useSupabaseClient();
+
   if (req.query.API_ROUTE_SECRET !== process.env.API_ROUTE_SECRET) {
     return res.status(401).send("You are not authorized to call this API.");
   }
