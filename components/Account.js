@@ -103,7 +103,7 @@ export default function Account({ session }) {
 
   return (
     <div className="container text-center">
-      <h1 className="my-5 text-xl font-bold">Home Test</h1>
+      <h1 className="my-5 text-xl font-bold">Home</h1>
       <p className="mt-10">Step 1: Update your background</p>
       <p className="my-0.5 text-xs italic">
         Optional if you have already completed in the past
