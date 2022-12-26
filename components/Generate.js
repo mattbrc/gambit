@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import { Data } from "../data/data";
 
 const Generate = ({
+  supabase,
+  userId,
   name,
   experience,
   age_range,
@@ -20,92 +22,87 @@ const Generate = ({
 
   const [isGenerated, setIsGenerated] = useState(false);
 
-  const workoutTest = {
-    workout: {
-      day1: {
-        strength: {
-          bench: {
-            sets: "1x6-9, 1x12-15",
-          },
-          deadlift: {
-            sets: "1x6-9, 1x12-15",
-          },
-          squat: {
-            sets: "sets: 1x6-9, 1x12-15",
-          },
-        },
-        endurance: {
-          run: {
-            volume: "30 min steady state",
-          },
+  async function insertWorkout() {
+    const { data, error } = await supabase.from("user_workouts").insert([
+      {
+        user_id: userId,
+        workout: {
+          description: "Puppy is slower than other, bigger animals.",
+          price: 5.95,
+          ages: [3, 6],
         },
       },
-      day2: {
-        strength: "rest",
-        endurance: "rest",
-      },
-    },
-  };
+    ]);
+  }
 
   async function generateWorkouts() {
-    console.log("generating workouts now...");
-    console.log("name: ", name);
-    console.log("gym type: ", gym_type);
-    console.log("gym type: ", experience);
-    console.log("workout test: ", data.UpperBody[0]);
+    // if days_per_week == 3
+    // day 1: full body strength + conditioning
+    // day 2: full body strength + conditioning
+    // day 3: steady state
+
+    // else if days_per_week == 4
+    // day 1: lower strength + conditioning
+    // day 2: upper strength + steady state
+    // day 3: lower strength + conditioning
+    // day 4: upper strength + steady state
+
+    // else if days_per_week == 5
+    // day 1: lower strength + conditioning
+    // day 2: upper strength + steady state
+    // day 3: lower strength + conditioning
+    // day 4: upper strength + steady state
+    // day 5: steady state
+
+    // else if days_per_week == 6
+    // day 1: lower strength + conditioning
+    // day 2: upper strength + steady state
+    // day 3: conditioning
+    // day 4: lower strength + conditioning
+    // day 5: upper strength + steady state
+    // day 6: steady state
+
     setIsGenerated(true);
   }
 
   return (
     <div>
-      <button
+      {/* <button
         className="my-2 btn btn-success"
         onClick={() => generateWorkouts()}
       >
         Generate Workouts
-      </button>
-      <div>
-        {!isGenerated ? (
-          <div></div>
-        ) : (
+      </button> */}
+      <label
+        htmlFor="generate-workouts"
+        className="my-2 btn btn-success"
+        onClick={() => generateWorkouts()}
+      >
+        Generate Workouts
+      </label>
+      <input type="checkbox" id="generate-workouts" className="modal-toggle" />
+      <div className="modal">
+        <div className="relative modal-box">
+          <label
+            htmlFor="generate-workouts"
+            className="absolute btn btn-sm btn-circle right-2 top-2"
+          >
+            ✕
+          </label>
+          <h3 className="text-lg font-bold">Training Week</h3>
+          <p className="my-0.5 text-xs italic pb-2">
+            Screenshot to save. Workout page coming soon...
+          </p>
           <div>
-            <h1>Day 1</h1>
-            <div className="inline-grid grid-cols-2">
-              <p>{data.UpperBody[0].name}</p>
-              <p>{data.UpperBody[0].setsReps}</p>
-              <p>{data.UpperBody[2].name}</p>
-              <p>{data.UpperBody[2].setsReps}</p>
-              <p>{data.LowerBody[1].name}</p>
-              <p>{data.LowerBody[1].setsReps}</p>
-            </div>
-            <h1>Day 2</h1>
-            <p>Rest</p>
-            <h1>Day 3</h1>
-            <div className="inline-grid grid-cols-2">
-              <p>{data.UpperBody[0].name}</p>
-              <p>{data.UpperBody[0].setsReps}</p>
-              <p>{data.UpperBody[2].name}</p>
-              <p>{data.UpperBody[2].setsReps}</p>
-              <p>{data.LowerBody[1].name}</p>
-              <p>{data.LowerBody[1].setsReps}</p>
-            </div>
-            <h1>Day 4</h1>
-            <p>Rest</p>
-            <h1>Day 5</h1>
-            <div className="inline-grid grid-cols-2">
-              <p>{data.UpperBody[0].name}</p>
-              <p>{data.UpperBody[0].setsReps}</p>
-              <p>{data.UpperBody[2].name}</p>
-              <p>{data.UpperBody[2].setsReps}</p>
-              <p>{data.LowerBody[1].name}</p>
-              <p>{data.LowerBody[1].setsReps}</p>
-            </div>
-            <h1>Day 6</h1>
-            <p>Rest</p>
-            <h1>Day 7</h1>
-            <p>Rest</p>
+            {!isGenerated ? (
+              <div>loading...</div>
+            ) : (
+              <div>
+                <h1>Workout generated and inserted into DB</h1>
+              </div>
+            )}
           </div>
-        )}
+        </div>
       </div>
     </div>
   );

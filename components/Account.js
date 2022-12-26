@@ -9,6 +9,7 @@ import Generate from "./Generate";
 export default function Account({ session }) {
   const user = useUser();
   const supabase = useSupabaseClient();
+  const [userId, setUserId] = useState(null);
   const [name, setName] = useState(null);
   const [experience, setExperience] = useState(null);
   const [age_range, setAge_range] = useState(null);
@@ -37,6 +38,7 @@ export default function Account({ session }) {
       }
 
       if (data) {
+        setUserId(user.id);
         setName(data.full_name);
         setExperience(data.experience);
         setAge_range(data.age_range);
@@ -45,7 +47,6 @@ export default function Account({ session }) {
         setDays_per_week(data.days_per_week);
         setTime_per_workout(data.time_per_workout);
         setGym_type(data.gym_type);
-        console.log("data.fullname: ", data.full_name);
       }
     } catch (error) {
       alert("Error loading user data!");
@@ -188,7 +189,7 @@ export default function Account({ session }) {
             ✕
           </label>
           <h3 className="text-lg font-bold">Let's update your preferences:</h3>
-          <div className="container w-full max-w-xs form-control">
+          {/* <div className="container w-full max-w-xs form-control">
             <label className="label">
               <span className="label-text">What are your training goals?</span>
             </label>
@@ -211,8 +212,8 @@ export default function Account({ session }) {
               </option>
               <option value="Improved VO2 Max">Improved VO2 Max</option>
             </select>
-          </div>
-          <div className="container w-full max-w-xs form-control">
+          </div> */}
+          {/* <div className="container w-full max-w-xs form-control">
             <label className="label">
               <span className="label-text">What are your physical goals?</span>
             </label>
@@ -232,7 +233,7 @@ export default function Account({ session }) {
               </option>
               <option value="Maintenance">Maintenance</option>
             </select>
-          </div>
+          </div> */}
           <div className="container w-full max-w-xs form-control">
             <label className="label">
               <span className="label-text">
@@ -253,7 +254,7 @@ export default function Account({ session }) {
               <option value="6">6</option>
             </select>
           </div>
-          <div className="container w-full max-w-xs form-control">
+          {/* <div className="container w-full max-w-xs form-control">
             <label className="label">
               <span className="label-text">
                 How long can you train each day?
@@ -272,8 +273,8 @@ export default function Account({ session }) {
               <option value="45 - 60 min">45 - 60 min</option>
               <option value="60 - 90 min">60 - 90 min</option>
             </select>
-          </div>
-          <div className="container w-full max-w-xs form-control">
+          </div> */}
+          {/* <div className="container w-full max-w-xs form-control">
             <label className="label">
               <span className="label-text">
                 What type of equipment/gym do you have?
@@ -296,7 +297,7 @@ export default function Account({ session }) {
               <option value="Home Gym">Home Gym</option>
               <option value="Bodyweight">Bodyweight</option>
             </select>
-          </div>
+          </div> */}
           <div className="modal-action">
             <label
               htmlFor="preferences-modal"
@@ -322,6 +323,8 @@ export default function Account({ session }) {
         Create your workouts for the next 7 days
       </p>
       <Generate
+        supabase={supabase}
+        userId={userId}
         name={name}
         experience={experience}
         age_range={age_range}
