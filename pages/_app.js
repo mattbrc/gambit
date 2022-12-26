@@ -3,6 +3,7 @@ import { useState } from "react";
 import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import Nav from "../components/Nav";
+import { Analytics } from "@vercel/analytics/react";
 
 function MyApp({ Component, pageProps }) {
   // create new client on every 1st render
@@ -17,6 +18,7 @@ function MyApp({ Component, pageProps }) {
     >
       <Nav />
       <Component {...pageProps} />
+      <Analytics />
     </SessionContextProvider>
   );
 }
