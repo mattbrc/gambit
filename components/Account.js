@@ -201,12 +201,11 @@ export default function Account({ session }) {
               <option disabled selected>
                 Pick one
               </option>
-              <option value="Improved Long Distance Endurance">
-                Endurance Athlete
-              </option>
-              <option value="Improved Peak Strength">
+              <option value="Endurance">Endurance Athlete</option>
+              <option value="Peak Muscle + Strength">
                 Peak Muscle + Strength
               </option>
+              <option value="Hybrid Athlete">Hybrid Athlete</option>
               <option value="General Health + Longevity">
                 General Health + Longevity
               </option>
