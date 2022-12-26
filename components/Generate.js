@@ -99,6 +99,7 @@ const Generate = ({
             ) : (
               <div>
                 <h1>Workout generated and inserted into DB</h1>
+                <p>your workout here...</p>
               </div>
             )}
           </div>
