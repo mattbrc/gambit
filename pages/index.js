@@ -8,6 +8,7 @@ export default function Home() {
 
   return (
     <div>
+      <p>this is a test</p>
       {!session ? (
         <div className="w-full max-w-md px-10 mx-auto my-16">
           <Auth
@@ -29,7 +30,10 @@ export default function Home() {
           />
         </div>
       ) : (
-        <Account session={session} />
+        <div>
+          <p>this is another test</p>
+          <Account session={session} />
+        </div>
       )}
     </div>
   );
