@@ -189,9 +189,9 @@ export default function Account({ session }) {
             ✕
           </label>
           <h3 className="text-lg font-bold">Let's update your preferences:</h3>
-          {/* <div className="container w-full max-w-xs form-control">
+          <div className="container w-full max-w-xs form-control">
             <label className="label">
-              <span className="label-text">What are your training goals?</span>
+              <span className="label-text">Choose your training path</span>
             </label>
             <select
               className="select select-bordered"
@@ -202,17 +202,16 @@ export default function Account({ session }) {
                 Pick one
               </option>
               <option value="Improved Long Distance Endurance">
-                Improved Long Distance Endurance
+                Endurance Athlete
               </option>
               <option value="Improved Peak Strength">
-                Improved Peak Strength
+                Peak Muscle + Strength
               </option>
               <option value="General Health + Longevity">
                 General Health + Longevity
               </option>
-              <option value="Improved VO2 Max">Improved VO2 Max</option>
             </select>
-          </div> */}
+          </div>
           {/* <div className="container w-full max-w-xs form-control">
             <label className="label">
               <span className="label-text">What are your physical goals?</span>

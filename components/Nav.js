@@ -42,7 +42,10 @@ const Nav = () => {
                   <a href="/">Home</a>
                 </li>
                 <li>
-                  <a href="/workouts">Workouts</a>
+                  <a href="/dashboard">Dashboard</a>
+                </li>
+                <li>
+                  <a href="/analytics">Analytics</a>
                 </li>
                 <li>
                   <a href="/account">Account</a>
@@ -59,7 +62,10 @@ const Nav = () => {
                 <a href="/">Home</a>
               </li>
               <li>
-                <a href="/workouts">Workouts</a>
+                <a href="/dashboard">Dashboard</a>
+              </li>
+              <li>
+                <a href="/analytics">Analytics</a>
               </li>
               <li>
                 <a href="/account">Account</a>

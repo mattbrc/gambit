@@ -1,6 +1,6 @@
 import { useSession } from "@supabase/auth-helpers-react";
 
-export default function Workouts() {
+export default function Account() {
   const session = useSession();
 
   return (
@@ -14,7 +14,7 @@ export default function Workouts() {
         </div>
       ) : (
         <div className="container text-center">
-          <h1 className="my-5 text-xl font-bold">Workout Page Coming Soon!</h1>
+          <h1 className="my-5 text-xl font-bold">Analytics coming soon!</h1>
         </div>
       )}
     </div>
