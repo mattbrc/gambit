@@ -247,7 +247,6 @@ export default function Account({ session }) {
               <option disabled selected>
                 Pick one
               </option>
-              <option value="2">2</option>
               <option value="3">3</option>
               <option value="4">4</option>
               <option value="5">5</option>
@@ -322,7 +321,16 @@ export default function Account({ session }) {
       <p className="my-0.5 text-xs italic">
         Create your workouts for the next 7 days
       </p>
-      <Generate />
+      <Generate
+        name={name}
+        experience={experience}
+        age_range={age_range}
+        gym_type={gym_type}
+        goals={goals}
+        weight_goals={weight_goals}
+        days_per_week={days_per_week}
+        time_per_workout={time_per_workout}
+      />
     </div>
   );
 }

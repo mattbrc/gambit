@@ -6,53 +6,19 @@ import {
 import { useEffect, useState } from "react";
 import { Data } from "../data/data";
 
-const Generate = ({ session }) => {
+const Generate = ({
+  name,
+  experience,
+  age_range,
+  gym_type,
+  goals,
+  weight_goals,
+  days_per_week,
+  time_per_workout,
+}) => {
   const data = Data;
-  const user = useUser();
-  const supabase = useSupabaseClient();
-  const [name, setName] = useState(null);
-  const [experience, setExperience] = useState(null);
-  const [age_range, setAge_range] = useState(null);
-  const [goals, setGoals] = useState(null);
-  const [weight_goals, setWeight_goals] = useState(null);
-  const [days_per_week, setDays_per_week] = useState(null);
-  const [time_per_workout, setTime_per_workout] = useState(null);
-  const [gym_type, setGym_type] = useState(null);
+
   const [isGenerated, setIsGenerated] = useState(false);
-
-  useEffect(() => {
-    getProfile();
-  }, [session]);
-
-  async function getProfile() {
-    try {
-      let { data, error, status } = await supabase
-        .from("profiles")
-        .select(
-          `full_name, experience, age_range, goals, weight_goals, days_per_week, time_per_workout, gym_type`
-        )
-        .eq("id", user.id)
-        .single();
-
-      if (error && status !== 406) {
-        throw error;
-      }
-
-      if (data) {
-        setName(data.full_name);
-        setExperience(data.experience);
-        setAge_range(data.age_range);
-        setGoals(data.goals);
-        setWeight_goals(data.weight_goals);
-        setDays_per_week(data.days_per_week);
-        setTime_per_workout(data.time_per_workout);
-        setGym_type(data.gym_type);
-      }
-    } catch (error) {
-      alert("Error loading user data!");
-      console.log(error);
-    }
-  }
 
   const workoutTest = {
     workout: {
@@ -85,6 +51,7 @@ const Generate = ({ session }) => {
     console.log("generating workouts now...");
     console.log("name: ", name);
     console.log("gym type: ", gym_type);
+    console.log("gym type: ", experience);
     console.log("workout test: ", data.UpperBody[0]);
     setIsGenerated(true);
   }
