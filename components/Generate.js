@@ -4,7 +4,9 @@ import {
   useUser,
 } from "@supabase/auth-helpers-react";
 import { useEffect, useState } from "react";
-import { Data } from "../data/data";
+import { data } from "../data/data";
+import { Link } from "next/link";
+import { insert } from "formik";
 
 const Generate = ({
   supabase,
@@ -18,61 +20,74 @@ const Generate = ({
   days_per_week,
   time_per_workout,
 }) => {
-  const data = Data;
+  const workouts = data;
+  const id = userId;
 
   const [isGenerated, setIsGenerated] = useState(false);
 
-  async function insertWorkout() {
-    const { data, error } = await supabase.from("user_workouts").insert([
-      {
-        user_id: userId,
-        workout: {
-          description: "Puppy is slower than other, bigger animals.",
-          price: 5.95,
-          ages: [3, 6],
-        },
-      },
-    ]);
+  async function insertWorkout({ program }) {
+    try {
+      const updates = {
+        created_at: new Date().toISOString(),
+        user_id: id,
+        workout: program,
+      };
+
+      let { error } = await supabase.from("user_workouts").insert(updates);
+      if (error) throw error;
+      alert("Profile updated!");
+    } catch (error) {
+      alert("Error updating the data!");
+      console.log(error);
+    }
   }
 
   async function generateWorkouts() {
-    // if days_per_week == 3
-    // day 1: full body strength + conditioning
-    // day 2: full body strength + conditioning
-    // day 3: steady state
-
-    // else if days_per_week == 4
-    // day 1: lower strength + conditioning
-    // day 2: upper strength + steady state
-    // day 3: lower strength + conditioning
-    // day 4: upper strength + steady state
-
-    // else if days_per_week == 5
-    // day 1: lower strength + conditioning
-    // day 2: upper strength + steady state
-    // day 3: lower strength + conditioning
-    // day 4: upper strength + steady state
-    // day 5: steady state
-
-    // else if days_per_week == 6
-    // day 1: lower strength + conditioning
-    // day 2: upper strength + steady state
-    // day 3: conditioning
-    // day 4: lower strength + conditioning
-    // day 5: upper strength + steady state
-    // day 6: steady state
-
+    const program = [
+      {
+        day1: {
+          strength: {
+            movement1: {
+              1: workouts.upper1[0].name,
+              2: workouts.upper1[0].setsReps,
+            },
+            movement2: {
+              1: workouts.upper1[1].name,
+              2: workouts.upper1[1].setsReps,
+            },
+            movement3: {
+              1: workouts.upper1[2].name,
+              2: workouts.upper1[2].setsReps,
+            },
+            movement4: {
+              1: workouts.upper1[3].name,
+              2: workouts.upper1[3].setsReps,
+            },
+            movement5: {
+              1: workouts.upper1[4].name,
+              2: workouts.upper1[4].setsReps,
+            },
+            movement6: {
+              1: workouts.upper1[5].name,
+              2: workouts.upper1[5].setsReps,
+            },
+            movement7: {
+              1: workouts.upper1[6].name,
+              2: workouts.upper1[6].setsReps,
+            },
+          },
+          endurance: "rest",
+          intervals: workouts.intervals[0],
+          conditioning: "rest",
+        },
+      },
+    ];
+    insertWorkout({ program });
     setIsGenerated(true);
   }
 
   return (
     <div>
-      {/* <button
-        className="my-2 btn btn-success"
-        onClick={() => generateWorkouts()}
-      >
-        Generate Workouts
-      </button> */}
       <label
         htmlFor="generate-workouts"
         className="my-2 btn btn-success"
@@ -89,17 +104,16 @@ const Generate = ({
           >
             ✕
           </label>
-          <h3 className="text-lg font-bold">Training Week</h3>
-          <p className="my-0.5 text-xs italic pb-2">
-            Screenshot to save. Workout page coming soon...
-          </p>
+          <h3 className="my-2 text-lg font-bold">Training Week</h3>
           <div>
             {!isGenerated ? (
               <div>loading...</div>
             ) : (
               <div>
-                <h1>Workout generated and inserted into DB</h1>
-                <p>Workout here:</p>
+                <h1>Workouts generated! Head to your dashboard to view.</h1>
+                <a className="my-4 btn" href="/dashboard">
+                  Dashboard
+                </a>
               </div>
             )}
           </div>

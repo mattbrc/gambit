@@ -50,6 +50,9 @@ const Nav = () => {
                 <li>
                   <a href="/account">Account</a>
                 </li>
+                <li>
+                  <a href="https://guide.acidgambit.com/">Guide</a>
+                </li>
               </ul>
             </div>
             <a className="text-xl normal-case btn btn-ghost" href="/">
@@ -69,6 +72,9 @@ const Nav = () => {
               </li>
               <li>
                 <a href="/account">Account</a>
+              </li>
+              <li>
+                <a href="https://guide.acidgambit.com/">Guide</a>
               </li>
             </ul>
           </div>

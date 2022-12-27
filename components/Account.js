@@ -232,7 +232,7 @@ export default function Account({ session }) {
               <option value="Maintenance">Maintenance</option>
             </select>
           </div> */}
-          <div className="container w-full max-w-xs form-control">
+          {/* <div className="container w-full max-w-xs form-control">
             <label className="label">
               <span className="label-text">
                 How many days per week can you train?
@@ -251,7 +251,7 @@ export default function Account({ session }) {
               <option value="5">5</option>
               <option value="6">6</option>
             </select>
-          </div>
+          </div> */}
           {/* <div className="container w-full max-w-xs form-control">
             <label className="label">
               <span className="label-text">
