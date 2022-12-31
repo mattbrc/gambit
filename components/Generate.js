@@ -8,29 +8,24 @@ import { data } from "../data/data";
 import { Link } from "next/link";
 import { insert } from "formik";
 
-const Generate = ({
-  supabase,
-  userId,
-  name,
-  experience,
-  age_range,
-  gym_type,
-  goals,
-  weight_goals,
-  days_per_week,
-  time_per_workout,
-}) => {
-  const workouts = data;
-  const id = userId;
-
+const Generate = ({ supabase, userId, goals }) => {
   const [isGenerated, setIsGenerated] = useState(false);
 
-  async function insertWorkout({ program }) {
+  const program = data.hybrid_base;
+  const id = userId;
+
+  // add new workout to user_workouts for user_id
+  async function insertWorkout() {
     try {
+      let { newWorkout } = await supabase
+        .from("workouts")
+        .select("*")
+        .eq("name", { goals });
       const updates = {
         created_at: new Date().toISOString(),
         user_id: id,
-        workout: program,
+        name: goals,
+        training: program,
       };
 
       let { error } = await supabase.from("user_workouts").insert(updates);
@@ -43,46 +38,10 @@ const Generate = ({
   }
 
   async function generateWorkouts() {
-    const program = [
-      {
-        day1: {
-          strength: {
-            movement1: {
-              1: workouts.upper1[0].name,
-              2: workouts.upper1[0].setsReps,
-            },
-            movement2: {
-              1: workouts.upper1[1].name,
-              2: workouts.upper1[1].setsReps,
-            },
-            movement3: {
-              1: workouts.upper1[2].name,
-              2: workouts.upper1[2].setsReps,
-            },
-            movement4: {
-              1: workouts.upper1[3].name,
-              2: workouts.upper1[3].setsReps,
-            },
-            movement5: {
-              1: workouts.upper1[4].name,
-              2: workouts.upper1[4].setsReps,
-            },
-            movement6: {
-              1: workouts.upper1[5].name,
-              2: workouts.upper1[5].setsReps,
-            },
-            movement7: {
-              1: workouts.upper1[6].name,
-              2: workouts.upper1[6].setsReps,
-            },
-          },
-          endurance: "rest",
-          intervals: workouts.intervals[0],
-          conditioning: "rest",
-        },
-      },
-    ];
-    insertWorkout({ program });
+    // query workout from workouts table
+    // set old user workout to is_active==false (if needed)
+    // add new workout to user_workouts and set is_active==true
+    insertWorkout();
     setIsGenerated(true);
   }
 
@@ -93,7 +52,7 @@ const Generate = ({
         className="my-2 btn btn-success"
         onClick={() => generateWorkouts()}
       >
-        Generate Workouts
+        Start New Program
       </label>
       <input type="checkbox" id="generate-workouts" className="modal-toggle" />
       <div className="modal">

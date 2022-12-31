@@ -74,7 +74,13 @@ const Nav = () => {
                 <a href="/account">Account</a>
               </li>
               <li>
-                <a href="https://guide.acidgambit.com/">Guide</a>
+                <a
+                  target="_blank"
+                  href="https://guide.acidgambit.com/"
+                  rel="noopener noreferrer"
+                >
+                  Guide
+                </a>
               </li>
             </ul>
           </div>

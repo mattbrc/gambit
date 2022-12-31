@@ -190,6 +190,7 @@ export default function Account({ session }) {
           </label>
           <h3 className="text-lg font-bold">Let's update your preferences:</h3>
           <div className="container w-full max-w-xs form-control">
+            {/* goals == training path */}
             <label className="label">
               <span className="label-text">Choose your training path</span>
             </label>
@@ -201,14 +202,8 @@ export default function Account({ session }) {
               <option disabled selected>
                 Pick one
               </option>
-              <option value="Endurance">Endurance Athlete</option>
-              <option value="Peak Muscle + Strength">
-                Peak Muscle + Strength
-              </option>
               <option value="Hybrid Athlete">Hybrid Athlete</option>
-              <option value="General Health + Longevity">
-                General Health + Longevity
-              </option>
+              <option value="Milprep">Milprep</option>
             </select>
           </div>
           {/* <div className="container w-full max-w-xs form-control">
