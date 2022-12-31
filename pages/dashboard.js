@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 export default function Dashboard() {
   const session = useSession();
   const supabase = useSupabaseClient();
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     getProfile();
@@ -14,7 +14,7 @@ export default function Dashboard() {
     const { data, error } = await supabase
       .from("user_workouts")
       .select("training");
-    setData(data);
+    setData(data[0].training);
   }
 
   const TrainingCard = ({
@@ -63,43 +63,19 @@ export default function Dashboard() {
   const TrainingList = ({ program }) => {
     return (
       <div className="training-list">
-        {hybrid_base.map((program) => (
+        {program.map((training) => (
           <TrainingCard
-            key={program.day}
-            day={program.day}
-            strength={program.strength}
-            endurance={program.endurance}
-            conditioning={program.conditioning}
-            complete={program.complete}
+            key={training.day}
+            day={training.day}
+            strength={training.strength}
+            endurance={training.endurance}
+            conditioning={training.conditioning}
+            complete={training.complete}
           />
         ))}
       </div>
     );
   };
-
-  const hybrid_base = [
-    {
-      day: 1,
-      strength: "stuff",
-      endurance: "stuff",
-      conditioning: "stuff",
-      complete: false,
-    },
-    {
-      day: 2,
-      strength: "stuff",
-      endurance: "stuff",
-      conditioning: "stuff",
-      complete: false,
-    },
-    {
-      day: 3,
-      strength: "stuff",
-      endurance: "stuff",
-      conditioning: "stuff",
-      complete: false,
-    },
-  ];
 
   return (
     <div className="w-full max-w-xl px-10 mx-auto my-16">
