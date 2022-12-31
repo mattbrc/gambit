@@ -5,51 +5,82 @@ export default function Dashboard() {
   const session = useSession();
   const supabase = useSupabaseClient();
   const [data, setData] = useState([]);
+  const [date, setDate] = useState();
 
   useEffect(() => {
-    getProfile();
+    getDate();
+    getUserWorkouts();
   }, [session]);
 
-  async function getProfile() {
-    const { data, error } = await supabase
-      .from("user_workouts")
-      .select("training");
-    setData(data[0].training);
+  async function getDate() {
+    const currentDay = new Date().getDate();
+    const nameMonth = new Intl.DateTimeFormat("en-US", {
+      month: "short",
+    }).format(new Date());
+    const weekday = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+
+    const d = new Date();
+    let day = weekday[d.getDay()];
+    const currentDate = day + ", " + nameMonth + " " + currentDay;
+    setDate(currentDate);
   }
 
-  const TrainingCard = ({
-    day,
-    strength,
-    endurance,
-    conditioning,
-    complete,
-  }) => {
+  async function getUserWorkouts() {
+    const { data, error } = await supabase
+      .from("user_workouts")
+      .select("training")
+      .eq("is_active", true);
+
+    if (data.length === 0 || !data) {
+      setData([]);
+    } else {
+      setData(data[0].training);
+    }
+  }
+
+  const TrainingCard = ({ day, week, strength, endurance, conditioning }) => {
     return (
       <div>
         <div className="w-full max-w-3xl px-2 mx-auto my-4 shadow-xl rounded-xl bg-base-100">
           <div className="card-body">
-            <h2 className="card-title">Day {day}</h2>
+            <h2 className="card-title">
+              Week {week} Day {day}
+            </h2>
             <p>Strength + Conditioning</p>
             <div className="justify-center card-actions">
-              <label htmlFor="workout" className="btn btn-success">
+              <label htmlFor={week + day} className="btn btn-success">
                 View Workout
               </label>
-              <input type="checkbox" id="workout" className="modal-toggle" />
+              <input type="checkbox" id={week + day} className="modal-toggle" />
               <div className="modal">
                 <div className="relative modal-box">
                   <label
-                    htmlFor="workout"
+                    htmlFor={week + day}
                     className="absolute btn btn-sm btn-circle right-2 top-2"
                   >
                     ✕
                   </label>
-                  <h3 className="font-bold">Day {day}</h3>
                   <p className="font-bold">Strength + Conditioning</p>
                   <div className="text-sm">
-                    <p>Strength: {strength}</p>
+                    {typeof strength === "string" ? (
+                      <p>Strength: {strength}</p>
+                    ) : (
+                      Object.keys(strength).map((exercise) => (
+                        <p key={exercise}>
+                          {exercise}: {strength[exercise]}
+                        </p>
+                      ))
+                    )}
                     <p>Endurance: {endurance}</p>
                     <p>Conditioning: {conditioning}</p>
-                    <p>Complete: {complete ? "Yes" : "No"}</p>
                   </div>
                 </div>
               </div>
@@ -65,12 +96,12 @@ export default function Dashboard() {
       <div className="training-list">
         {program.map((training) => (
           <TrainingCard
-            key={training.day}
+            key={`week-${training.week}-day-${training.day}`}
             day={training.day}
+            week={training.week}
             strength={training.strength}
             endurance={training.endurance}
             conditioning={training.conditioning}
-            complete={training.complete}
           />
         ))}
       </div>
@@ -78,22 +109,27 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="w-full max-w-xl px-10 mx-auto my-16">
-      {!session ? (
-        <div className="container text-center">
-          <p className="my-5">You are not logged in!</p>
-          <a className="btn" href="/">
-            Sign In
-          </a>
-        </div>
-      ) : (
-        <div className="text-center">
-          <h1 className="my-5 text-xl font-bold">Training Dashboard</h1>
-          <div>
-            <TrainingList program={data} />
+    <div>
+      <div className="pt-6 mx-4">
+        <h1 className="text-lg font-bold">Training Dashboard</h1>
+        <p className="text-zinc-400">{date}</p>
+      </div>
+      <div className="w-full max-w-xl px-10 mx-auto my-4">
+        {!session ? (
+          <div className="container text-center">
+            <p className="my-5">You are not logged in!</p>
+            <a className="btn" href="/">
+              Sign In
+            </a>
           </div>
-        </div>
-      )}
+        ) : (
+          <div className="text-center">
+            <div>
+              <TrainingList program={data} />
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

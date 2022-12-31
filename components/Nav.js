@@ -85,7 +85,10 @@ const Nav = () => {
             </ul>
           </div>
           <div className="navbar-end">
-            <a className="btn" onClick={() => supabase.auth.signOut()}>
+            <a
+              className="btn btn-outline"
+              onClick={() => supabase.auth.signOut()}
+            >
               Sign Out
             </a>
           </div>
