@@ -1,10 +1,17 @@
 import Link from "next/link";
 import { useUser } from "@supabase/auth-helpers-react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useRouter } from "next/router";
 
 const Nav = () => {
+  const router = useRouter();
   const user = useUser();
   const supabase = useSupabaseClient();
+
+  const handleSignOut = () => {
+    supabase.auth.signOut();
+    router.push("/");
+  };
 
   return (
     <div>
@@ -85,10 +92,7 @@ const Nav = () => {
             </ul>
           </div>
           <div className="navbar-end">
-            <a
-              className="btn btn-outline"
-              onClick={() => supabase.auth.signOut()}
-            >
+            <a className="btn btn-outline" onClick={handleSignOut}>
               Sign Out
             </a>
           </div>
