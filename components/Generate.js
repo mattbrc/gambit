@@ -1,47 +1,114 @@
-import {
-  useSession,
-  useSupabaseClient,
-  useUser,
-} from "@supabase/auth-helpers-react";
+import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useEffect, useState } from "react";
-import { data } from "../data/data";
-import { Link } from "next/link";
-import { insert } from "formik";
 
-const Generate = ({ supabase, userId, goals }) => {
+const Generate = ({ userId, goals }) => {
   const [isGenerated, setIsGenerated] = useState(false);
-
-  const program = data.hybrid_base;
+  const supabase = useSupabaseClient();
   const id = userId;
 
-  // add new workout to user_workouts for user_id
-  async function insertWorkout() {
-    try {
-      let { newWorkout } = await supabase
-        .from("workouts")
-        .select("*")
-        .eq("name", { goals });
+  async function insertNewWorkouts() {
+    const { data, error } = await supabase.from("workouts").insert([
+      {
+        name: "Hybrid Athlete Base",
+        training: {
+          wd: 11,
+          description: "Strength + Conditioning",
+          day: 1,
+          week: 1,
+          complete: false,
+          strength: {
+            a: "Squat: 4x6",
+            b: "Deadlift: 2x6",
+            c: "Weighted Lunges: 3x8-12",
+            d: "Bulgarian Split Squats: 3x8-12",
+          },
+          endurance: "Rest",
+          conditioning: "4x400m @ mile pace, 2:1 rest/work ratio",
+        },
+      },
+      {
+        name: "Hybrid Athlete Base",
+        training: {
+          wd: 12,
+          description: "Endurance",
+          day: 2,
+          week: 1,
+          complete: false,
+          strength: {
+            a: "Bench: 2x10, 1x8, 1x6",
+            b: "DB/Machine Row: 2x10, 1x8, 1x6",
+            c: "Seated Shoulder Press: 2x12, 1x10, 1x8",
+            d: "Weighted Pull-Ups: 2x12, 1x10, 1x8",
+            e: "Cable Tricep Pushdown: 3x8-12",
+            f: "DB Hammer Curls: 3x8-12",
+          },
+          endurance: "30 min steady state run/bike",
+          conditioning: "Rest",
+        },
+      },
+    ]);
+  }
+
+  async function checkIfTableIsEmpty() {
+    let { data } = await supabase
+      .from("user_workouts")
+      .select("*")
+      .eq("user_id", id);
+    console.log("data: ", data.length);
+    return data.length === 0;
+  }
+
+  // grab workout the user selected from DB
+  async function getWorkouts() {
+    const { data, error } = await supabase
+      .from("workouts")
+      .select(
+        "name,wd:training->wd,day:training->day,week:training->week,complete:training->complete,description:training->description,strength:training->strength,conditioning:training->conditioning,endurance:training->endurance"
+      )
+      .eq("name", "Hybrid Athlete Base");
+    const sortedObject = data.sort((a, b) => {
+      return a.wd - b.wd;
+    });
+    console.log(JSON.stringify(sortedObject, null, 2));
+    return sortedObject;
+  }
+
+  // add new workouts to user_workouts for user_id and program type
+  async function insertWorkout({ workouts }) {
+    // if not empty set previous workouts to inactive
+    const isTableEmpty = await checkIfTableIsEmpty();
+    const length = workouts.length;
+    if (!isTableEmpty) {
+      await supabase
+        .from("user_workouts")
+        .update({
+          is_active: false,
+        })
+        .eq("is_active", true);
+    }
+
+    for (let i = 0; i < length; i++) {
       const updates = {
         created_at: new Date().toISOString(),
         user_id: id,
         name: goals,
-        training: program,
+        wd: workouts[i].wd,
+        week: workouts[i].week,
+        day: workouts[i].day,
+        strength: workouts[i].strength,
+        conditioning: workouts[i].conditioning,
+        endurance: workouts[i].endurance,
       };
 
       let { error } = await supabase.from("user_workouts").insert(updates);
       if (error) throw error;
-      alert("Profile updated!");
-    } catch (error) {
-      alert("Error updating the data!");
-      console.log(error);
     }
   }
 
   async function generateWorkouts() {
-    // query workout from workouts table
-    // set old user workout to is_active==false (if needed)
-    // add new workout to user_workouts and set is_active==true
-    insertWorkout();
+    const workouts = await getWorkouts();
+    insertWorkout({ workouts });
+    // insertNewWorkouts();
     setIsGenerated(true);
   }
 

@@ -1,5 +1,7 @@
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useState, useEffect } from "react";
+import UpdateWorkout from "../components/UpdateWorkout";
+import TrainingList from "../components/TrainingList";
 
 export default function Dashboard() {
   const session = useSession();
@@ -33,80 +35,26 @@ export default function Dashboard() {
     setDate(currentDate);
   }
 
+  async function checkIfTableIsEmpty() {
+    let { data } = await supabase
+      .from("user_workouts")
+      .select("*")
+      .eq("is_active", true);
+    console.log("data: ", data.length);
+    return data.length === 0;
+  }
+
   async function getUserWorkouts() {
     const { data, error } = await supabase
       .from("user_workouts")
-      .select("training")
+      .select("name, strength, conditioning, endurance, wd, day, week")
       .eq("is_active", true);
 
-    if (data.length === 0 || !data) {
-      setData([]);
-    } else {
-      setData(data[0].training);
+    const isTableEmpty = await checkIfTableIsEmpty();
+    if (!isTableEmpty) {
+      setData(data);
     }
   }
-
-  const TrainingCard = ({ day, week, strength, endurance, conditioning }) => {
-    return (
-      <div>
-        <div className="w-full max-w-3xl px-2 mx-auto my-4 shadow-xl rounded-xl bg-base-100">
-          <div className="card-body">
-            <h2 className="card-title">
-              Week {week} Day {day}
-            </h2>
-            <p>Strength + Conditioning</p>
-            <div className="justify-center card-actions">
-              <label htmlFor={week + day} className="btn btn-success">
-                View Workout
-              </label>
-              <input type="checkbox" id={week + day} className="modal-toggle" />
-              <div className="modal">
-                <div className="relative modal-box">
-                  <label
-                    htmlFor={week + day}
-                    className="absolute btn btn-sm btn-circle right-2 top-2"
-                  >
-                    ✕
-                  </label>
-                  <p className="font-bold">Strength + Conditioning</p>
-                  <div className="text-sm">
-                    {typeof strength === "string" ? (
-                      <p>Strength: {strength}</p>
-                    ) : (
-                      Object.keys(strength).map((exercise) => (
-                        <p key={exercise}>
-                          {exercise}: {strength[exercise]}
-                        </p>
-                      ))
-                    )}
-                    <p>Endurance: {endurance}</p>
-                    <p>Conditioning: {conditioning}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  const TrainingList = ({ program }) => {
-    return (
-      <div className="training-list">
-        {program.map((training) => (
-          <TrainingCard
-            key={`week-${training.week}-day-${training.day}`}
-            day={training.day}
-            week={training.week}
-            strength={training.strength}
-            endurance={training.endurance}
-            conditioning={training.conditioning}
-          />
-        ))}
-      </div>
-    );
-  };
 
   return (
     <div>

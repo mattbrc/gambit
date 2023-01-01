@@ -27,9 +27,7 @@ export default function Account({ session }) {
     try {
       let { data, error, status } = await supabase
         .from("profiles")
-        .select(
-          `full_name, experience, age_range, goals, weight_goals, days_per_week, time_per_workout, gym_type`
-        )
+        .select("full_name, goals")
         .eq("id", user.id)
         .single();
 
@@ -39,14 +37,14 @@ export default function Account({ session }) {
 
       if (data) {
         setUserId(user.id);
-        setName(data.full_name);
-        setExperience(data.experience);
-        setAge_range(data.age_range);
+        // setName(data.full_name);
+        // setExperience(data.experience);
+        // setAge_range(data.age_range);
         setGoals(data.goals);
-        setWeight_goals(data.weight_goals);
-        setDays_per_week(data.days_per_week);
-        setTime_per_workout(data.time_per_workout);
-        setGym_type(data.gym_type);
+        // setWeight_goals(data.weight_goals);
+        // setDays_per_week(data.days_per_week);
+        // setTime_per_workout(data.time_per_workout);
+        // setGym_type(data.gym_type);
       }
     } catch (error) {
       alert("Error loading user data!");
@@ -54,40 +52,30 @@ export default function Account({ session }) {
     }
   }
 
-  async function updateBackground({ experience, age_range }) {
-    try {
-      const updates = {
-        id: user.id,
-        experience,
-        age_range,
-        updated_at: new Date().toISOString(),
-      };
+  // async function updateBackground({ experience, age_range }) {
+  //   try {
+  //     const updates = {
+  //       id: user.id,
+  //       experience,
+  //       age_range,
+  //       updated_at: new Date().toISOString(),
+  //     };
 
-      let { error } = await supabase.from("profiles").upsert(updates);
-      if (error) throw error;
-      console.log("updating background...");
-      alert("Profile updated!");
-    } catch (error) {
-      alert("Error updating the data!");
-      console.log(error);
-    }
-  }
+  //     let { error } = await supabase.from("profiles").upsert(updates);
+  //     if (error) throw error;
+  //     console.log("updating background...");
+  //     alert("Profile updated!");
+  //   } catch (error) {
+  //     alert("Error updating the data!");
+  //     console.log(error);
+  //   }
+  // }
 
-  async function updatePreferences({
-    goals,
-    weight_goals,
-    days_per_week,
-    time_per_workout,
-    gym_type,
-  }) {
+  async function updatePreferences({ goals }) {
     try {
       const updates = {
         id: user.id,
         goals,
-        weight_goals,
-        days_per_week,
-        time_per_workout,
-        gym_type,
         updated_at: new Date().toISOString(),
       };
 
@@ -104,12 +92,12 @@ export default function Account({ session }) {
   return (
     <div className="container text-center">
       <h1 className="my-5 text-xl font-bold">Home</h1>
-      <p className="mt-10">Step 1: Update your background</p>
+      {/* <p className="mt-10">Step 1: Update your background</p>
       <p className="my-0.5 text-xs italic">
         Optional if you have already completed in the past
-      </p>
+      </p> */}
       {/* BACKGROUND MODAL */}
-      <label htmlFor="background-modal" className="my-2 btn">
+      {/* <label htmlFor="background-modal" className="my-2 btn">
         Update Background
       </label>
       <input type="checkbox" id="background-modal" className="modal-toggle" />
@@ -170,9 +158,9 @@ export default function Account({ session }) {
             </label>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* PREFERENCES MODAL */}
-      <p>Step 2: Update your preferences</p>
+      <p>Step 1: Select Training Path</p>
       <p className="my-0.5 text-xs italic">
         Optional if you have already completed in the past
       </p>
@@ -298,10 +286,6 @@ export default function Account({ session }) {
               onClick={() =>
                 updatePreferences({
                   goals,
-                  weight_goals,
-                  days_per_week,
-                  time_per_workout,
-                  gym_type,
                 })
               }
             >
@@ -311,22 +295,11 @@ export default function Account({ session }) {
         </div>
       </div>
       {/* WORKOUT GENERATION BUTTON */}
-      <p>Step 3: Generate your workouts!</p>
+      <p>Step 2: Start Your Program</p>
       <p className="my-0.5 text-xs italic">
         Create your workouts for the next 7 days
       </p>
-      <Generate
-        supabase={supabase}
-        userId={userId}
-        name={name}
-        experience={experience}
-        age_range={age_range}
-        gym_type={gym_type}
-        goals={goals}
-        weight_goals={weight_goals}
-        days_per_week={days_per_week}
-        time_per_workout={time_per_workout}
-      />
+      <Generate userId={userId} name={name} goals={goals} />
     </div>
   );
 }
