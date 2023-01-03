@@ -6,6 +6,7 @@ const TrainingCard = ({
   strength,
   endurance,
   conditioning,
+  description,
 }) => {
   return (
     <div>
@@ -14,7 +15,7 @@ const TrainingCard = ({
           <h2 className="card-title">
             Week {week} Day {day}
           </h2>
-          <h3>{name}</h3>
+          <h3>{description}</h3>
           <div className="justify-center card-actions">
             <label htmlFor={wd} className="btn btn-success">
               View workout
@@ -66,6 +67,7 @@ const TrainingList = ({ program }) => {
           day={workout.training.day}
           week={workout.training.week}
           name={workout.name}
+          description={workout.training.description}
           strength={workout.training.strength}
           endurance={workout.training.endurance}
           conditioning={workout.training.conditioning}
