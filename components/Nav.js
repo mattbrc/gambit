@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useUser } from "@supabase/auth-helpers-react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
@@ -45,6 +44,7 @@ const Nav = () => {
                 tabIndex={0}
                 className="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
               >
+                {/* mobile display */}
                 <li>
                   <a href="/">Home</a>
                 </li>
@@ -52,10 +52,10 @@ const Nav = () => {
                   <a href="/dashboard">Dashboard</a>
                 </li>
                 <li>
-                  <a href="/analytics">Analytics</a>
+                  <a className="text-zinc-400">Analytics</a>
                 </li>
                 <li>
-                  <a href="/account">Account</a>
+                  <a className="text-zinc-400">Account</a>
                 </li>
                 <li>
                   <a href="https://guide.acidgambit.com/">Guide</a>
@@ -63,7 +63,7 @@ const Nav = () => {
               </ul>
             </div>
             <a className="text-xl normal-case btn btn-ghost" href="/">
-              Gambit
+              Gambit <span className="pt-1 text-xs">v1.0.0</span>
             </a>
           </div>
           <div className="hidden navbar-center lg:flex">
@@ -75,10 +75,10 @@ const Nav = () => {
                 <a href="/dashboard">Dashboard</a>
               </li>
               <li>
-                <a href="/analytics">Analytics</a>
+                <a className="text-zinc-400">Analytics</a>
               </li>
               <li>
-                <a href="/account">Account</a>
+                <a className="text-zinc-400">Account</a>
               </li>
               <li>
                 <a

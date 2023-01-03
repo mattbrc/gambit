@@ -1,15 +1,19 @@
 import { Auth, ThemeSupa } from "@supabase/auth-ui-react";
-import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
-import Account from "../components/Account";
-import Link from "next/link";
+import {
+  useUser,
+  useSession,
+  useSupabaseClient,
+} from "@supabase/auth-helpers-react";
+import Homepage from "../components/Homepage";
 
 export default function Home() {
   const session = useSession();
+  const user = useUser();
   const supabase = useSupabaseClient();
 
-  return (
-    <div>
-      {!session ? (
+  if (!user)
+    return (
+      <div>
         <div className="w-full max-w-md px-10 mx-auto my-16">
           <Auth
             supabaseClient={supabase}
@@ -29,11 +33,14 @@ export default function Home() {
             theme="dark"
           />
         </div>
-      ) : (
-        <div>
-          <Account session={session} />
-        </div>
-      )}
+      </div>
+    );
+
+  return (
+    <div>
+      <div>
+        <Homepage session={session} />
+      </div>
     </div>
   );
 }

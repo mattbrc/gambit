@@ -17,7 +17,7 @@ const TrainingCard = ({
           <h3>{name}</h3>
           <div className="justify-center card-actions">
             <label htmlFor={wd} className="btn btn-success">
-              View Workout
+              View workout
             </label>
             <input type="checkbox" id={wd} className="modal-toggle" />
             <div className="modal">
@@ -55,18 +55,20 @@ const TrainingCard = ({
 };
 
 const TrainingList = ({ program }) => {
+  const sortedProgram = program.sort((a, b) => a.training.wd - b.training.wd);
+
   return (
     <div className="training-list">
-      {program.map((workout) => (
+      {sortedProgram.map((workout) => (
         <TrainingCard
-          key={`week-${workout.week}-day-${workout.day}`}
-          wd={workout.wd}
-          day={workout.day}
-          week={workout.week}
+          key={`week-${workout.training.week}-day-${workout.training.day}`}
+          wd={workout.training.wd}
+          day={workout.training.day}
+          week={workout.training.week}
           name={workout.name}
-          strength={workout.strength}
-          endurance={workout.endurance}
-          conditioning={workout.conditioning}
+          strength={workout.training.strength}
+          endurance={workout.training.endurance}
+          conditioning={workout.training.conditioning}
         />
       ))}
     </div>
