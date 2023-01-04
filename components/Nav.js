@@ -58,7 +58,13 @@ const Nav = () => {
                   <a className="text-zinc-400">Account</a>
                 </li>
                 <li>
-                  <a href="https://guide.acidgambit.com/">Guide</a>
+                  <a
+                    target="_blank"
+                    href="https://guide.acidgambit.com/"
+                    rel="noopener noreferrer"
+                  >
+                    Guide
+                  </a>
                 </li>
               </ul>
             </div>
