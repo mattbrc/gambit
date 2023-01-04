@@ -147,7 +147,7 @@ export default function Homepage({ session }) {
                   <option value="Hybrid Athlete Base">
                     Hybrid Athlete Base
                   </option>
-                  <option value="Milprep">Milprep</option>
+                  {/* <option value="Milprep">Milprep</option> */}
                 </select>
               </div>
               <div className="modal-action">
