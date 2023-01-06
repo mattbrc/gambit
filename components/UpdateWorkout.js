@@ -1,29 +1,68 @@
-// allow users to check off a workout as complete
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import {
+  useSession,
+  useUser,
+  useSupabaseClient,
+} from "@supabase/auth-helpers-react";
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { useState, useEffect } from "react";
 
-const UpdateWorkout = ({ workoutToComplete }) => {
+const UpdateWorkout = ({ nextWorkout, activeProgram, workout }) => {
   const supabase = useSupabaseClient();
+  const user = useUser();
 
   async function handleComplete() {
-    const { data, error } = await supabase
-      .from("user_workouts")
-      .select("training")
-      .eq("is_active", true);
-    console.log("workout to complete: ", data);
+    addNextWorkout();
+    addCompletedWorkout();
   }
 
-  async function getWorkouts() {
-    const { data, error } = await supabase
-      .from("workouts")
-      .select(
-        "name,wd:training->wd,day:training->day,week:training->week,complete:training->complete,description:training->description,strength:training->strength,conditioning:training->conditioning,endurance:training->endurance"
-      )
-      .eq("name", "Hybrid Athlete Base");
-    const sortedObject = data.sort((a, b) => {
-      return a.wd - b.wd;
-    });
-    console.log(JSON.stringify(sortedObject, null, 2));
-    return sortedObject;
+  async function addNextWorkout() {
+    try {
+      const updateNextWorkout = Number(nextWorkout) + 1;
+
+      const updates = {
+        id: user.id,
+        next_workout: updateNextWorkout,
+        updated_at: new Date().toISOString(),
+      };
+
+      let { data, error } = await supabase
+        .from("user_training")
+        .upsert(updates)
+        .eq("id", user.id);
+
+      if (error) throw error;
+      console.log("updated your next workout!");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function addCompletedWorkout() {
+    try {
+      var today = new Date();
+      var dd = String(today.getDate()).padStart(2, "0");
+      var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+      var yyyy = today.getFullYear();
+
+      today = mm + "/" + dd + "/" + yyyy;
+
+      const updates = {
+        user_id: user.id,
+        name: activeProgram,
+        training: workout,
+        training_id: nextWorkout,
+        date_completed: today,
+      };
+
+      let { error } = await supabase
+        .from("user_completed_workouts")
+        .insert(updates);
+
+      if (error) throw error;
+      console.log("updated your next workout!");
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (

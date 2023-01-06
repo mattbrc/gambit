@@ -1,3 +1,11 @@
+import {
+  useSession,
+  useUser,
+  useSupabaseClient,
+} from "@supabase/auth-helpers-react";
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { useState, useEffect } from "react";
+
 const TrainingCard = ({
   wd,
   day,
@@ -7,7 +15,68 @@ const TrainingCard = ({
   endurance,
   conditioning,
   description,
+  nextWorkout,
+  workout,
+  onWorkoutComplete,
 }) => {
+  const supabase = useSupabaseClient();
+  const user = useUser();
+
+  async function handleComplete() {
+    addNextWorkout();
+    addCompletedWorkout();
+  }
+
+  async function addNextWorkout() {
+    try {
+      const updateNextWorkout = Number(nextWorkout) + 1;
+
+      const updates = {
+        id: user.id,
+        next_workout: updateNextWorkout,
+        updated_at: new Date().toISOString(),
+      };
+
+      let { data, error } = await supabase
+        .from("user_training")
+        .upsert(updates)
+        .eq("id", user.id);
+
+      if (error) throw error;
+      console.log("updated your next workout!");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function addCompletedWorkout() {
+    try {
+      var today = new Date();
+      var dd = String(today.getDate()).padStart(2, "0");
+      var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+      var yyyy = today.getFullYear();
+
+      today = mm + "/" + dd + "/" + yyyy;
+
+      const updates = {
+        user_id: user.id,
+        name: name,
+        training: workout,
+        training_id: nextWorkout,
+        date_completed: today,
+      };
+
+      let { error } = await supabase
+        .from("user_completed_workouts")
+        .insert(updates);
+
+      if (error) throw error;
+      console.log("updated your next workout!");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div>
       <div className="w-full max-w-3xl px-2 mx-auto my-4 shadow-xl rounded-xl bg-base-100">
@@ -44,7 +113,18 @@ const TrainingCard = ({
                     <span className="font-bold">Conditioning:</span>{" "}
                     {conditioning}
                   </p>
-                  {/* <UpdateWorkout workoutToComplete={wd} /> */}
+                  <div className="flex flex-col items-center">
+                    <label
+                      htmlFor={wd}
+                      className="btn btn-sm"
+                      onClick={() => {
+                        handleComplete();
+                        onWorkoutComplete(wd);
+                      }}
+                    >
+                      Complete
+                    </label>
+                  </div>
                 </div>
               </div>
             </div>
@@ -55,24 +135,38 @@ const TrainingCard = ({
   );
 };
 
-const TrainingList = ({ program }) => {
+const TrainingList = ({ program, nextWorkout }) => {
   const sortedProgram = program.sort((a, b) => a.training.wd - b.training.wd);
+
+  const [completedWorkouts, setCompletedWorkouts] = useState([]);
+
+  function handleWorkoutComplete(id) {
+    setCompletedWorkouts([...completedWorkouts, id]);
+  }
 
   return (
     <div className="training-list">
-      {sortedProgram.map((workout) => (
-        <TrainingCard
-          key={`week-${workout.training.week}-day-${workout.training.day}`}
-          wd={workout.training.wd}
-          day={workout.training.day}
-          week={workout.training.week}
-          name={workout.name}
-          description={workout.training.description}
-          strength={workout.training.strength}
-          endurance={workout.training.endurance}
-          conditioning={workout.training.conditioning}
-        />
-      ))}
+      {sortedProgram
+        .slice(nextWorkout)
+        .filter((workout) => !completedWorkouts.includes(workout.training.wd))
+        .map((workout) => (
+          <div>
+            <TrainingCard
+              key={workout.training.wd}
+              wd={workout.training.wd}
+              day={workout.training.day}
+              week={workout.training.week}
+              name={workout.name}
+              description={workout.training.description}
+              strength={workout.training.strength}
+              endurance={workout.training.endurance}
+              conditioning={workout.training.conditioning}
+              nextWorkout={nextWorkout}
+              workout={workout.training}
+              onWorkoutComplete={handleWorkoutComplete}
+            />
+          </div>
+        ))}
     </div>
   );
 };

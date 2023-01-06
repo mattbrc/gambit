@@ -5,15 +5,12 @@ import {
 } from "@supabase/auth-helpers-react";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useState, useEffect } from "react";
-// import UpdateWorkout from "../components/UpdateWorkout";
 import { Oval } from "react-loader-spinner";
 import TrainingList from "../components/TrainingList";
 
 export default function Dashboard({ user, userData }) {
   const session = useSession();
   const supabase = useSupabaseClient();
-  // const user = useUser();
-  const [activeWorkout, setActiveWorkout] = useState(null);
   const [nextWorkout, setNextWorkout] = useState(null);
   const [loading, setLoading] = useState(null);
   const [data, setData] = useState([]);
@@ -21,7 +18,6 @@ export default function Dashboard({ user, userData }) {
 
   useEffect(() => {
     getDate();
-    // getUserTraining();
     getWorkouts();
   }, [session]);
 
@@ -36,6 +32,7 @@ export default function Dashboard({ user, userData }) {
       if (data) {
         setData(data);
         console.log("data: ", data);
+        setNextWorkout(userData.next_workout);
       }
       if (error) throw error;
       console.log("retrieved workouts for your active program!");
@@ -84,7 +81,6 @@ export default function Dashboard({ user, userData }) {
                 Past
               </a>
             </div>
-            {/* {loading ? <TrainingList program={data} /> : <p>Loading</p>} */}
             {loading ? (
               <div className="grid my-20 place-items-center">
                 <p className="text-sm">loading...</p>
@@ -102,7 +98,9 @@ export default function Dashboard({ user, userData }) {
                 />
               </div>
             ) : (
-              <TrainingList program={data} />
+              <div>
+                <TrainingList program={data} nextWorkout={nextWorkout} />
+              </div>
             )}
           </div>
         </div>

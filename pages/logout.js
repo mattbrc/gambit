@@ -9,7 +9,7 @@ const Logout = () => {
   useEffect(() => {
     const logout = async () => {
       await supabase.auth.signOut();
-      router.push("/");
+      router.push("/signin");
     };
     logout();
   }, []);

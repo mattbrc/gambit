@@ -85,93 +85,94 @@ export default function Homepage({ session }) {
     }
   }
 
-  if (loading)
-    return (
-      <div className="grid my-20 place-items-center">
-        <Oval
-          height={30}
-          width={30}
-          color="#000000"
-          wrapperStyle={{}}
-          wrapperClass=""
-          visible={true}
-          ariaLabel="oval-loading"
-          secondaryColor="#000000"
-          strokeWidth={6}
-          strokeWidthSecondary={6}
-        />
-      </div>
-    );
-
   return (
     <div>
       <div className="container text-center">
         <h1 className="my-5 text-xl font-bold">Home</h1>
-        <div>
-          <p>Step 1: Select Training Path</p>
-          <p className="my-0.5 text-xs italic">
-            Optional if you have already completed in the past
-          </p>
-          <label htmlFor="preferences-modal" className="my-2 btn">
-            Update Preferences
-          </label>
-          <input
-            type="checkbox"
-            id="preferences-modal"
-            className="modal-toggle"
-          />
-          <div className="modal">
-            <div className="modal-box">
-              <label
-                htmlFor="preferences-modal"
-                className="absolute btn btn-sm btn-circle right-2 top-2"
-              >
-                ✕
-              </label>
-              <h3 className="text-lg font-bold">
-                Let's update your preferences:
-              </h3>
-              <div className="container w-full max-w-xs form-control">
-                {/* goals == training path */}
-                <label className="label">
-                  <span className="label-text">Choose your training path</span>
-                </label>
-                <select
-                  className="select select-bordered"
-                  value={goals}
-                  onChange={(e) => setGoals(e.target.value)}
-                >
-                  <option disabled selected>
-                    Pick one
-                  </option>
-                  <option value="Hybrid Athlete Base">
-                    Hybrid Athlete Base
-                  </option>
-                  {/* <option value="Milprep">Milprep</option> */}
-                </select>
-              </div>
-              <div className="modal-action">
+        {loading ? (
+          <div className="grid my-20 place-items-center">
+            <Oval
+              height={30}
+              width={30}
+              color="#000000"
+              wrapperStyle={{}}
+              wrapperClass=""
+              visible={true}
+              ariaLabel="oval-loading"
+              secondaryColor="#000000"
+              strokeWidth={6}
+              strokeWidthSecondary={6}
+            />
+          </div>
+        ) : (
+          <div>
+            <p>Step 1: Select Training Path</p>
+            <p className="my-0.5 text-xs italic">
+              Optional if you have already completed in the past
+            </p>
+            <label htmlFor="preferences-modal" className="my-2 btn">
+              Update Preferences
+            </label>
+            <input
+              type="checkbox"
+              id="preferences-modal"
+              className="modal-toggle"
+            />
+            <div className="modal">
+              <div className="modal-box">
                 <label
                   htmlFor="preferences-modal"
-                  className="btn"
-                  onClick={() =>
-                    updatePreferences({
-                      goals,
-                    })
-                  }
+                  className="absolute btn btn-sm btn-circle right-2 top-2"
                 >
-                  Submit
+                  ✕
                 </label>
+                <h3 className="text-lg font-bold">
+                  Let's update your preferences:
+                </h3>
+                <div className="container w-full max-w-xs form-control">
+                  {/* goals == training path */}
+                  <label className="label">
+                    <span className="label-text">
+                      Choose your training path
+                    </span>
+                  </label>
+                  <select
+                    className="select select-bordered"
+                    value={goals}
+                    onChange={(e) => setGoals(e.target.value)}
+                  >
+                    <option disabled selected>
+                      Pick one
+                    </option>
+                    <option value="Hybrid Athlete Base">
+                      Hybrid Athlete Base
+                    </option>
+                    {/* <option value="Milprep">Milprep</option> */}
+                  </select>
+                </div>
+                <div className="modal-action">
+                  <label
+                    htmlFor="preferences-modal"
+                    className="btn"
+                    onClick={() =>
+                      updatePreferences({
+                        goals,
+                      })
+                    }
+                  >
+                    Submit
+                  </label>
+                </div>
               </div>
             </div>
+            {/* WORKOUT GENERATION BUTTON */}
+            <p>Step 2: Start Your Program</p>
+            <p className="my-0.5 text-xs italic">
+              Create your workouts for the next 7 days
+            </p>
+            <Generate userId={userId} name={name} goals={goals} />
           </div>
-          {/* WORKOUT GENERATION BUTTON */}
-          <p>Step 2: Start Your Program</p>
-          <p className="my-0.5 text-xs italic">
-            Create your workouts for the next 7 days
-          </p>
-          <Generate userId={userId} name={name} goals={goals} />
-        </div>
+        )}
       </div>
     </div>
   );

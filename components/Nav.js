@@ -17,7 +17,9 @@ const Nav = () => {
       {!user ? (
         <div className="navbar bg-base-100">
           <div className="navbar-start">
-            <a className="text-xl normal-case btn btn-ghost">Gambit</a>
+            <a className="text-xl normal-case btn btn-ghost">
+              Gambit <span className="pt-1 text-xs">v0.1.0</span>
+            </a>
           </div>
         </div>
       ) : (
@@ -55,7 +57,7 @@ const Nav = () => {
                   <a className="text-zinc-400">Analytics</a>
                 </li>
                 <li>
-                  <a className="text-zinc-400">Account</a>
+                  <a href="/account">Account</a>
                 </li>
                 <li>
                   <a
@@ -69,7 +71,7 @@ const Nav = () => {
               </ul>
             </div>
             <a className="text-xl normal-case btn btn-ghost" href="/">
-              Gambit <span className="pt-1 text-xs">v1.0.0</span>
+              Gambit <span className="pt-1 text-xs">v0.1.0</span>
             </a>
           </div>
           <div className="hidden navbar-center lg:flex">
@@ -84,7 +86,7 @@ const Nav = () => {
                 <a className="text-zinc-400">Analytics</a>
               </li>
               <li>
-                <a className="text-zinc-400">Account</a>
+                <a href="/account">Account</a>
               </li>
               <li>
                 <a
