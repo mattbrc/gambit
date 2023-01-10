@@ -5,7 +5,6 @@ import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import Nav from "../components/Nav";
 import { Toaster } from "react-hot-toast";
 import { Analytics } from "@vercel/analytics/react";
-import ErrorBoundary from "../components/ErrorBoundary";
 
 function MyApp({ Component, pageProps }) {
   // create new client on every 1st render
@@ -19,9 +18,7 @@ function MyApp({ Component, pageProps }) {
       initalSession={pageProps.initalSession}
     >
       <Nav />
-      <ErrorBoundary>
-        <Component {...pageProps} />
-      </ErrorBoundary>
+      <Component {...pageProps} />
       <Toaster />
       <Analytics />
     </SessionContextProvider>

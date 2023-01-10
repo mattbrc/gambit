@@ -81,7 +81,7 @@ export default function Homepage({ session }) {
         setGoals(data.goals);
       }
     } catch (error) {
-      alert("Error loading user data!");
+      // alert("Error loading user data!");
       console.log(error);
     }
   }
@@ -103,7 +103,7 @@ export default function Homepage({ session }) {
         setCount(data.completed_workouts);
       }
     } catch (error) {
-      alert("Error loading user data!");
+      // alert("Error loading user data!");
       console.log(error);
     } finally {
       setLoading(false);
@@ -217,7 +217,7 @@ export default function Homepage({ session }) {
                   <Generate
                     userId={userId}
                     activeProgram="Hybrid Athlete Base"
-                    disabled="true"
+                    disabled={true}
                   />
                   <div className="justify-center card-actions">
                     <div className="badge badge-outline">Strength</div>
@@ -237,7 +237,7 @@ export default function Homepage({ session }) {
                   <Generate
                     userId={userId}
                     activeProgram="Hybrid Athlete Base"
-                    disabled="true"
+                    disabled={true}
                   />
                   <div className="justify-center card-actions">
                     <div className="badge badge-outline">Strength</div>
@@ -257,7 +257,7 @@ export default function Homepage({ session }) {
                   <Generate
                     userId={userId}
                     activeProgram="Hybrid Athlete Base"
-                    disabled="true"
+                    disabled={true}
                   />
                   <div className="justify-center card-actions">
                     <div className="badge badge-outline">Conditioning</div>
@@ -273,7 +273,7 @@ export default function Homepage({ session }) {
                   <Generate
                     userId={userId}
                     activeProgram="Hybrid Athlete Base"
-                    disabled="true"
+                    disabled={true}
                   />
                   <div className="justify-center card-actions">
                     <div className="badge badge-outline">Strength</div>
