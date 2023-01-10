@@ -6,7 +6,7 @@ import {
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useState, useEffect } from "react";
 
-const UpdateWorkout = ({ nextWorkout, activeProgram, workout }) => {
+const UpdateWorkout = ({ count, nextWorkout, activeProgram, workout }) => {
   const supabase = useSupabaseClient();
   const user = useUser();
 
@@ -18,10 +18,12 @@ const UpdateWorkout = ({ nextWorkout, activeProgram, workout }) => {
   async function addNextWorkout() {
     try {
       const updateNextWorkout = Number(nextWorkout) + 1;
+      const updateCount = Number(count) + 1;
 
       const updates = {
         id: user.id,
         next_workout: updateNextWorkout,
+        completed_workouts: updateCount,
         updated_at: new Date().toISOString(),
       };
 

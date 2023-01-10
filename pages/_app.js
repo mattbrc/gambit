@@ -3,6 +3,7 @@ import { useState } from "react";
 import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import Nav from "../components/Nav";
+import { Toaster } from "react-hot-toast";
 import { Analytics } from "@vercel/analytics/react";
 
 function MyApp({ Component, pageProps }) {
@@ -18,6 +19,7 @@ function MyApp({ Component, pageProps }) {
     >
       <Nav />
       <Component {...pageProps} />
+      <Toaster />
       <Analytics />
     </SessionContextProvider>
   );

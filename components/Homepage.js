@@ -7,21 +7,36 @@ import { useEffect, useState } from "react";
 import Generate from "./Generate";
 import { Oval } from "react-loader-spinner";
 import TrainingCard from "./TrainingCard";
+import { FiEdit } from "react-icons/fi";
+import Link from "next/link";
+import { toast } from "react-hot-toast";
+
+function EditButton(props) {
+  return (
+    <Link href="/account">
+      <FiEdit size={20} />
+    </Link>
+  );
+}
 
 export default function Homepage({ session }) {
   const user = useUser();
   const supabase = useSupabaseClient();
   const [homeDisplay, setHomeDisplay] = useState(false);
   const [userId, setUserId] = useState(null);
-  const [name, setName] = useState(null);
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(true);
   const [goals, setGoals] = useState(null);
+  const [activeProgram, setActiveProgram] = useState(null);
+  const [count, setCount] = useState(0);
   const [date, setDate] = useState();
 
   useEffect(() => {
-    getProfile();
     getDate();
-    setLoading(false);
+    getProfile();
+    getActiveProgram();
+    // setLoading(false);
   }, [session]);
 
   async function getDate() {
@@ -49,7 +64,7 @@ export default function Homepage({ session }) {
     try {
       let { data, error, status } = await supabase
         .from("profiles")
-        .select("full_name, goals")
+        .select("full_name, username, goals")
         .eq("id", user.id)
         .single();
 
@@ -58,7 +73,11 @@ export default function Homepage({ session }) {
       }
 
       if (data) {
+        console.log(data);
+        console.log(user.id);
         setUserId(user.id);
+        setName(data.full_name);
+        setUsername(data.username);
         setGoals(data.goals);
       }
     } catch (error) {
@@ -67,21 +86,27 @@ export default function Homepage({ session }) {
     }
   }
 
-  async function updatePreferences({ goals }) {
+  async function getActiveProgram() {
     try {
-      const updates = {
-        id: user.id,
-        goals,
-        updated_at: new Date().toISOString(),
-      };
+      let { data, error, status } = await supabase
+        .from("user_training")
+        .select("active_program, completed_workouts")
+        .eq("id", user.id)
+        .single();
 
-      let { error } = await supabase.from("profiles").upsert(updates);
-      if (error) throw error;
-      console.log("updating preferences...");
-      // alert("Profile updated!");
+      if (error && status !== 406) {
+        throw error;
+      }
+
+      if (data) {
+        setActiveProgram(data.active_program);
+        setCount(data.completed_workouts);
+      }
     } catch (error) {
-      alert("Error updating the data!");
+      alert("Error loading user data!");
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -106,71 +131,156 @@ export default function Homepage({ session }) {
           </div>
         ) : (
           <div>
-            <p>Step 1: Select Training Path</p>
-            <p className="my-0.5 text-xs italic">
-              Optional if you have already completed in the past
-            </p>
-            <label htmlFor="preferences-modal" className="my-2 btn">
-              Update Preferences
-            </label>
-            <input
-              type="checkbox"
-              id="preferences-modal"
-              className="modal-toggle"
-            />
-            <div className="modal">
-              <div className="modal-box">
-                <label
-                  htmlFor="preferences-modal"
-                  className="absolute btn btn-sm btn-circle right-2 top-2"
-                >
-                  ✕
-                </label>
-                <h3 className="text-lg font-bold">
-                  Let's update your preferences:
-                </h3>
-                <div className="container w-full max-w-xs form-control">
-                  {/* goals == training path */}
-                  <label className="label">
-                    <span className="label-text">
-                      Choose your training path
-                    </span>
-                  </label>
-                  <select
-                    className="select select-bordered"
-                    value={goals}
-                    onChange={(e) => setGoals(e.target.value)}
-                  >
-                    <option disabled selected>
-                      Pick one
-                    </option>
-                    <option value="Hybrid Athlete Base">
-                      Hybrid Athlete Base
-                    </option>
-                    {/* <option value="Milprep">Milprep</option> */}
-                  </select>
+            <div className="flex flex-col items-center my-6">
+              <div className="border border-gray-300 shadow-md card w-80 bg-base-100">
+                <div className="absolute right-2 top-2">
+                  <EditButton />
                 </div>
-                <div className="modal-action">
-                  <label
-                    htmlFor="preferences-modal"
-                    className="btn"
-                    onClick={() =>
-                      updatePreferences({
-                        goals,
-                      })
-                    }
-                  >
-                    Submit
-                  </label>
+
+                <div className="justify-center mt-6 avatar placeholder">
+                  <div className="w-16 rounded-full bg-neutral-focus text-neutral-content">
+                    <span className="text-3xl">
+                      {name.charAt(0).toUpperCase()}
+                    </span>
+                  </div>
+                </div>
+                <div className="card-body">
+                  <p className="font-bold">{name}</p>
+                  <p>@{username}</p>
+                  <p>Completed Workouts: {count}</p>
                 </div>
               </div>
             </div>
-            {/* WORKOUT GENERATION BUTTON */}
-            <p>Step 2: Start Your Program</p>
-            <p className="my-0.5 text-xs italic">
-              Create your workouts for the next 7 days
-            </p>
-            <Generate userId={userId} name={name} goals={goals} />
+            {activeProgram === null || activeProgram === "" ? (
+              <div>
+                <p></p>
+              </div>
+            ) : (
+              <div>
+                <p className="text-xl font-bold">My Active Program</p>
+                <div className="flex flex-col items-center">
+                  <div className="my-4 border border-gray-300 shadow-md card w-80 bg-base-100">
+                    <div className="card-body">
+                      <h2 className="card-title">Hybrid Athlete</h2>
+                      <p>
+                        Hybrid style training focused on efficiently improving
+                        VO2 Max, peak strength, and physique
+                      </p>
+                      <div className="flex flex-col items-center">
+                        <a
+                          className="w-40 my-4 btn btn-accent"
+                          href="/dashboard"
+                        >
+                          Dashboard
+                        </a>
+                      </div>
+                      <div className="justify-center card-actions">
+                        <div className="badge badge-outline">Strength</div>
+                        <div className="badge badge-outline">Conditioning</div>
+                        <div className="badge badge-outline">Endurance</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+            <p className="text-xl font-bold">Available Programs</p>
+            <div className="flex flex-col items-center">
+              <div className="my-4 border border-gray-300 shadow-md card w-80 bg-base-100">
+                <div className="card-body">
+                  <h2 className="card-title">Hybrid Athlete</h2>
+                  <div className="badge badge-accent">NEW</div>
+                  <p>
+                    Hybrid style training focused on efficiently improving VO2
+                    Max, peak strength, and physique
+                  </p>
+                  <Generate
+                    userId={userId}
+                    activeProgram="Hybrid Athlete Base"
+                  />
+                  <div className="justify-center card-actions">
+                    <div className="badge badge-outline">Strength</div>
+                    <div className="badge badge-outline">Conditioning</div>
+                    <div className="badge badge-outline">Endurance</div>
+                  </div>
+                </div>
+              </div>
+              <div className="my-4 border border-gray-300 shadow-md card w-80 bg-base-100">
+                <div className="card-body">
+                  <h2 className="card-title">MilPrep</h2>
+                  <div className="badge badge-accent">COMING SOON</div>
+                  <p>
+                    Training focused on preparing for SFAS or RASP. High level
+                    of conditioning work, rucking, calisthenics, and strenght
+                    work paired with recovery.
+                  </p>
+                  <Generate
+                    userId={userId}
+                    activeProgram="Hybrid Athlete Base"
+                    disabled="true"
+                  />
+                  <div className="justify-center card-actions">
+                    <div className="badge badge-outline">Strength</div>
+                    <div className="badge badge-outline">Conditioning</div>
+                    <div className="badge badge-outline">Endurance</div>
+                  </div>
+                </div>
+              </div>
+              <div className="my-4 border border-gray-300 shadow-md card w-80 bg-base-100">
+                <div className="card-body">
+                  <h2 className="card-title">Road Warrior</h2>
+                  <div className="badge badge-accent">COMING SOON</div>
+                  <p>
+                    Bodyweight centered training for those without access to
+                    equipment.
+                  </p>
+                  <Generate
+                    userId={userId}
+                    activeProgram="Hybrid Athlete Base"
+                    disabled="true"
+                  />
+                  <div className="justify-center card-actions">
+                    <div className="badge badge-outline">Strength</div>
+                    <div className="badge badge-outline">Conditioning</div>
+                    <div className="badge badge-outline">Endurance</div>
+                  </div>
+                </div>
+              </div>
+              <div className="my-4 border border-gray-300 shadow-md w-80 card bg-base-100">
+                <div className="card-body">
+                  <h2 className="card-title">Pure Endurance</h2>
+                  <div className="badge badge-accent">COMING SOON</div>
+                  <p>
+                    Pure running-focused training to take you from a 5k to your
+                    first half marathon and beyond.
+                  </p>
+                  <Generate
+                    userId={userId}
+                    activeProgram="Hybrid Athlete Base"
+                    disabled="true"
+                  />
+                  <div className="justify-center card-actions">
+                    <div className="badge badge-outline">Conditioning</div>
+                    <div className="badge badge-outline">Endurance</div>
+                  </div>
+                </div>
+              </div>
+              <div className="my-4 mb-20 border border-gray-300 shadow-md card w-80 bg-base-100">
+                <div className="card-body">
+                  <h2 className="card-title">Raw Strength</h2>
+                  <div className="badge badge-accent">COMING SOON</div>
+                  <p>Pure strength + hypertrophy training.</p>
+                  <Generate
+                    userId={userId}
+                    activeProgram="Hybrid Athlete Base"
+                    disabled="true"
+                  />
+                  <div className="justify-center card-actions">
+                    <div className="badge badge-outline">Strength</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </div>

@@ -12,6 +12,7 @@ export default function Dashboard({ user, userData }) {
   const session = useSession();
   const supabase = useSupabaseClient();
   const [nextWorkout, setNextWorkout] = useState(null);
+  const [count, setCount] = useState(null);
   const [loading, setLoading] = useState(null);
   const [data, setData] = useState([]);
   const [date, setDate] = useState();
@@ -33,6 +34,7 @@ export default function Dashboard({ user, userData }) {
         setData(data);
         console.log("data: ", data);
         setNextWorkout(userData.next_workout);
+        setCount(userData.completed_workouts);
       }
       if (error) throw error;
       console.log("retrieved workouts for your active program!");
@@ -99,7 +101,11 @@ export default function Dashboard({ user, userData }) {
               </div>
             ) : (
               <div>
-                <TrainingList program={data} nextWorkout={nextWorkout} />
+                <TrainingList
+                  program={data}
+                  nextWorkout={nextWorkout}
+                  count={count}
+                />
               </div>
             )}
           </div>
@@ -127,7 +133,7 @@ export const getServerSideProps = async (ctx) => {
 
   const { data: userData } = await supabase
     .from("user_training")
-    .select(`active_program, next_workout`)
+    .select(`active_program, next_workout, completed_workouts`)
     .eq("id", session.user.id)
     .single();
 

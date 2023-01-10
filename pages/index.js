@@ -5,11 +5,22 @@ import {
   useSupabaseClient,
 } from "@supabase/auth-helpers-react";
 import Homepage from "../components/Homepage";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 export default function Home() {
   const session = useSession();
   const user = useUser();
   const supabase = useSupabaseClient();
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    async function loadData() {
+      const { data } = await supabase.from("profiles").select("*");
+      setData(data);
+    }
+    if (user) loadData();
+  }, [user]);
 
   if (!user)
     return (
@@ -38,9 +49,7 @@ export default function Home() {
 
   return (
     <div>
-      <div>
-        <Homepage session={session} />
-      </div>
+      <Homepage session={session} />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { useSession } from "@supabase/auth-helpers-react";
 
-export default function Account() {
+export default function Analytics() {
   const session = useSession();
 
   return (

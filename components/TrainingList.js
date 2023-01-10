@@ -17,6 +17,7 @@ const TrainingCard = ({
   description,
   nextWorkout,
   workout,
+  count,
   onWorkoutComplete,
 }) => {
   const supabase = useSupabaseClient();
@@ -30,10 +31,12 @@ const TrainingCard = ({
   async function addNextWorkout() {
     try {
       const updateNextWorkout = Number(nextWorkout) + 1;
+      const updateCount = Number(count) + 1;
 
       const updates = {
         id: user.id,
         next_workout: updateNextWorkout,
+        completed_workouts: updateCount,
         updated_at: new Date().toISOString(),
       };
 
@@ -86,7 +89,7 @@ const TrainingCard = ({
           </h2>
           <h3>{description}</h3>
           <div className="justify-center card-actions">
-            <label htmlFor={wd} className="btn btn-success">
+            <label htmlFor={wd} className="btn btn-accent">
               View workout
             </label>
             <input type="checkbox" id={wd} className="modal-toggle" />
@@ -116,7 +119,7 @@ const TrainingCard = ({
                   <div className="flex flex-col items-center">
                     <label
                       htmlFor={wd}
-                      className="btn btn-sm"
+                      className="btn btn-sm btn-accent"
                       onClick={() => {
                         handleComplete();
                         onWorkoutComplete(wd);
@@ -135,7 +138,7 @@ const TrainingCard = ({
   );
 };
 
-const TrainingList = ({ program, nextWorkout }) => {
+const TrainingList = ({ program, nextWorkout, count }) => {
   const sortedProgram = program.sort((a, b) => a.training.wd - b.training.wd);
 
   const [completedWorkouts, setCompletedWorkouts] = useState([]);
@@ -163,6 +166,7 @@ const TrainingList = ({ program, nextWorkout }) => {
               conditioning={workout.training.conditioning}
               nextWorkout={nextWorkout}
               workout={workout.training}
+              count={count}
               onWorkoutComplete={handleWorkoutComplete}
             />
           </div>

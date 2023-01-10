@@ -1,7 +1,9 @@
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 
-const Generate = ({ userId, goals }) => {
+// change generate to accept active_program as a parameter
+const Generate = ({ userId, activeProgram, disabled }) => {
   const [isGenerated, setIsGenerated] = useState(false);
   const supabase = useSupabaseClient();
   const id = userId;
@@ -22,27 +24,24 @@ const Generate = ({ userId, goals }) => {
   }
 
   async function handleGenerate() {
-    try {
-      const updates = {
-        id: userId,
-        active_program: goals,
-        next_workout: 0,
-        updated_at: new Date().toISOString(),
-      };
-
-      // if (isTableEmpty) {
-      //   newUserTraining(updates);
-      //   console.log("it's empty");
-      // }
-
-      let { error } = await supabase.from("user_training").upsert(updates);
-      if (error) throw error;
-      console.log("updating preferences...");
-      alert("New program started!");
-    } catch (error) {
-      alert("Error updating the data!");
-      console.log(error);
-    }
+    const updates = {
+      id: userId,
+      active_program: activeProgram,
+      next_workout: 0,
+      updated_at: new Date().toISOString(),
+    };
+    // if (isTableEmpty) {
+    //   newUserTraining(updates);
+    //   console.log("it's empty");
+    // }
+    let { error } = await supabase.from("user_training").upsert(updates);
+    //   if (error) throw error;
+    //   console.log("updating preferences...");
+    //   alert("New program started!");
+    // } catch (error) {
+    //   alert("Error updating the data!");
+    //   console.log(error);
+    // }
   }
 
   // async function newUserTraining({ updates }) {
@@ -59,8 +58,15 @@ const Generate = ({ userId, goals }) => {
     <div>
       <label
         htmlFor="generate-workouts"
-        className="my-2 btn btn-success"
-        onClick={() => generateWorkouts()}
+        className="my-2 btn btn-accent"
+        disabled={disabled}
+        onClick={() =>
+          toast.promise(generateWorkouts(), {
+            loading: "Loading",
+            success: "New program started!",
+            error: "Error starting program",
+          })
+        }
       >
         Start New Program
       </label>
