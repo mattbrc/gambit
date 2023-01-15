@@ -156,6 +156,9 @@ export default function Homepage({ session }) {
                 </div>
               </div>
             </div>
+            <div className="grid place-items-center">
+              <div className="w-80 divider"></div>
+            </div>
             {activeProgram === null || activeProgram === "" ? (
               <div>
                 <p></p>
@@ -168,6 +171,9 @@ export default function Homepage({ session }) {
                 </div>
               </div>
             )}
+            <div className="grid place-items-center">
+              <div className="w-80 divider"></div>
+            </div>
             <p className="text-xl font-bold">Available Programs</p>
             <div className="flex flex-col items-center">
               <Hybrid userId={userId} active={false} />
