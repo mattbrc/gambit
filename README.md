@@ -4,6 +4,7 @@ Built as part of buildspace n+w s2 with:
 
 - Nextjs
 - React / Daisy UI
+- Data Validation: Formik + Yup
 - Tailwindcss
 - Supabase
 

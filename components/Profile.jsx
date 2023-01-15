@@ -58,9 +58,7 @@ const SignupForm = ({ name, username, user }) => {
         console.log(error)
       }
     }
-
-  
-
+    
     return (
       <div>
         <div className="justify-center avatar placeholder">

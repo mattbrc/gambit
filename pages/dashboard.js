@@ -7,20 +7,66 @@ import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useState, useEffect } from "react";
 import { Oval } from "react-loader-spinner";
 import TrainingList from "../components/TrainingList";
+import toast from "react-hot-toast";
 
 export default function Dashboard({ user, userData }) {
   const session = useSession();
   const supabase = useSupabaseClient();
   const [nextWorkout, setNextWorkout] = useState(null);
-  const [count, setCount] = useState(null);
+  const [completedWorkouts, setCompletedWorkouts] = useState(
+    Number(userData.completed_workouts)
+  );
   const [loading, setLoading] = useState(null);
   const [data, setData] = useState([]);
   const [date, setDate] = useState();
+  const [completedWorkoutId, setCompletedWorkoutId] = useState(
+    Number(userData.next_workout)
+  );
 
   useEffect(() => {
     getDate();
     getWorkouts();
   }, [session]);
+
+  useEffect(() => {
+    updateUserTraining();
+  }, [completedWorkoutId]);
+
+  async function handleComplete() {
+    setCompletedWorkoutId(Number(completedWorkoutId) + 1);
+    setCompletedWorkouts(Number(completedWorkouts) + 1);
+    addCompletedWorkout();
+  }
+
+  async function updateUserTraining() {
+    const updates = {
+      id: user.id,
+      next_workout: completedWorkoutId,
+      completed_workouts: completedWorkouts,
+      updated_at: new Date().toISOString(),
+    };
+
+    let { data, error } = await supabase
+      .from("user_training")
+      .upsert(updates)
+      .eq("id", user.id);
+  }
+
+  async function addCompletedWorkout() {
+    try {
+      const updates = {
+        user_id: user.id,
+        name: userData.active_program,
+        training: data[completedWorkoutId].training,
+        training_id: completedWorkoutId,
+      };
+      let { error } = await supabase
+        .from("user_completed_workouts")
+        .insert(updates);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   async function getWorkouts() {
     try {
@@ -28,13 +74,12 @@ export default function Dashboard({ user, userData }) {
 
       let { data, error } = await supabase
         .from("workouts")
-        .select(`name, training`)
+        .select(`name, training, training_id`)
         .eq("name", userData.active_program);
       if (data) {
         setData(data);
-        console.log("data: ", data);
         setNextWorkout(userData.next_workout);
-        setCount(userData.completed_workouts);
+        console.log(data[userData.next_workout]);
       }
       if (error) throw error;
       console.log("retrieved workouts for your active program!");
@@ -102,9 +147,9 @@ export default function Dashboard({ user, userData }) {
             ) : (
               <div>
                 <TrainingList
+                  handleComplete={handleComplete}
+                  completedWorkoutId={completedWorkoutId}
                   program={data}
-                  nextWorkout={nextWorkout}
-                  count={count}
                 />
               </div>
             )}

@@ -59,14 +59,14 @@ const TrainingCard = ({
   );
 };
 
-const TrainingList = ({ program, nextWorkout }) => {
-  const sortedProgram = program.sort((a, b) => b.training.wd - a.training.wd);
+const TrainingList = ({ program }) => {
+  const sortedProgram = program.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
   return (
     <div className="training-list">
-      {sortedProgram.slice(nextWorkout).map((workout) => (
+      {sortedProgram.map((workout) => (
         <TrainingCard
-          key={`week-${workout.training.week}-day-${workout.training.day}`}
+          key={workout.created_at}
           wd={workout.training.wd}
           day={workout.training.day}
           week={workout.training.week}
@@ -75,7 +75,7 @@ const TrainingList = ({ program, nextWorkout }) => {
           strength={workout.training.strength}
           endurance={workout.training.endurance}
           conditioning={workout.training.conditioning}
-          date={workout.date_completed}
+          date={workout.created_at}
         />
       ))}
     </div>

@@ -6,7 +6,7 @@ import {
 import { useEffect, useState } from "react";
 import Generate from "./Generate";
 import { Oval } from "react-loader-spinner";
-import TrainingCard from "./TrainingCard";
+// import TrainingCard from "./TrainingCard";
 import { FiEdit } from "react-icons/fi";
 import Link from "next/link";
 import { toast } from "react-hot-toast";
@@ -22,7 +22,6 @@ function EditButton(props) {
 export default function Homepage({ session }) {
   const user = useUser();
   const supabase = useSupabaseClient();
-  const [homeDisplay, setHomeDisplay] = useState(false);
   const [userId, setUserId] = useState(null);
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
@@ -91,20 +90,21 @@ export default function Homepage({ session }) {
       let { data, error, status } = await supabase
         .from("user_training")
         .select("active_program, completed_workouts")
-        .eq("id", user.id)
-        .single();
+        .eq("id", user.id);
+      // .single();
 
       if (error && status !== 406) {
         throw error;
       }
 
-      if (data) {
-        setActiveProgram(data.active_program);
-        setCount(data.completed_workouts);
+      if (data && data.length > 0) {
+        console.log("data: ", data);
+        setActiveProgram(data[0].active_program);
+        setCount(data[0].completed_workouts);
       }
     } catch (error) {
       // alert("Error loading user data!");
-      console.log(error);
+      // console.log(error);
     } finally {
       setLoading(false);
     }

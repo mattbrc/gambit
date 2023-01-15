@@ -18,7 +18,7 @@ const Nav = () => {
         <div className="navbar bg-base-100">
           <div className="navbar-start">
             <a className="text-xl normal-case btn btn-ghost">
-              Gambit <span className="pt-1 text-xs">v0.2.0</span>
+              Gambit <span className="pt-1 text-xs">v0.2.1</span>
             </a>
           </div>
         </div>
@@ -71,7 +71,7 @@ const Nav = () => {
               </ul>
             </div>
             <a className="text-xl normal-case btn btn-ghost" href="/">
-              Gambit <span className="pt-1 text-xs">v0.2.0</span>
+              Gambit <span className="pt-1 text-xs">v0.2.1</span>
             </a>
           </div>
           <div className="hidden navbar-center lg:flex">

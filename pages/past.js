@@ -13,7 +13,7 @@ export default function Dashboard({ user, userData }) {
   const supabase = useSupabaseClient();
   // const user = useUser();
   const [activeWorkout, setActiveWorkout] = useState(null);
-  const [nextWorkout, setNextWorkout] = useState(null);
+
   const [loading, setLoading] = useState(null);
   const [data, setData] = useState([]);
   const [date, setDate] = useState();
@@ -29,12 +29,11 @@ export default function Dashboard({ user, userData }) {
 
       let { data, error } = await supabase
         .from("user_completed_workouts")
-        .select(`name, training, date_completed`)
+        .select(`name, training, created_at`)
         .eq("name", userData.active_program);
       if (data) {
         setData(data);
         console.log("data: ", data);
-        setNextWorkout(userData.next_workout);
       }
       if (error) throw error;
       console.log("retrieved workouts for your completed workouts!");

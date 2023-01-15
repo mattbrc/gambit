@@ -6,7 +6,6 @@ import {
 } from "@supabase/auth-helpers-react";
 import Homepage from "../components/Homepage";
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 
 export default function Home() {
   const session = useSession();
