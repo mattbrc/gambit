@@ -30,7 +30,7 @@ export default function Dashboard({ user, userData }) {
       let { data, error } = await supabase
         .from("user_completed_workouts")
         .select(`name, training, created_at`)
-        .eq("name", userData.active_program);
+        .eq("user_id", user.id);
       if (data) {
         setData(data);
         console.log("data: ", data);
