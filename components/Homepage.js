@@ -1,15 +1,15 @@
-import {
-  useSession,
-  useSupabaseClient,
-  useUser,
-} from "@supabase/auth-helpers-react";
+import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import { useEffect, useState } from "react";
 import Generate from "./Generate";
 import { Oval } from "react-loader-spinner";
-// import TrainingCard from "./TrainingCard";
 import { FiEdit } from "react-icons/fi";
 import Link from "next/link";
-import { toast } from "react-hot-toast";
+import Hybrid, {
+  Milprep,
+  RoadWarrior,
+  PureEndurance,
+  RawStrength,
+} from "./ProgramCards";
 
 function EditButton(props) {
   return (
@@ -35,7 +35,6 @@ export default function Homepage({ session }) {
     getDate();
     getProfile();
     getActiveProgram();
-    // setLoading(false);
   }, [session]);
 
   async function getDate() {
@@ -165,127 +164,17 @@ export default function Homepage({ session }) {
               <div>
                 <p className="text-xl font-bold">My Active Program</p>
                 <div className="flex flex-col items-center">
-                  <div className="my-4 border border-gray-300 shadow-md card w-80 bg-base-100">
-                    <div className="card-body">
-                      <h2 className="card-title">Hybrid Athlete</h2>
-                      <p>
-                        Hybrid style training focused on efficiently improving
-                        VO2 Max, peak strength, and physique
-                      </p>
-                      <div className="flex flex-col items-center">
-                        <a
-                          className="w-40 my-4 btn btn-accent"
-                          href="/dashboard"
-                        >
-                          Dashboard
-                        </a>
-                      </div>
-                      <div className="justify-center card-actions">
-                        <div className="badge badge-outline">Strength</div>
-                        <div className="badge badge-outline">Conditioning</div>
-                        <div className="badge badge-outline">Endurance</div>
-                      </div>
-                    </div>
-                  </div>
+                  <Hybrid userId={userId} active={true} />
                 </div>
               </div>
             )}
             <p className="text-xl font-bold">Available Programs</p>
             <div className="flex flex-col items-center">
-              <div className="my-4 border border-gray-300 shadow-md card w-80 bg-base-100">
-                <div className="card-body">
-                  <h2 className="card-title">Hybrid Athlete</h2>
-                  <div className="badge badge-accent">NEW</div>
-                  <p>
-                    Hybrid style training focused on efficiently improving VO2
-                    Max, peak strength, and physique
-                  </p>
-                  <Generate
-                    userId={userId}
-                    activeProgram="Hybrid Athlete Base"
-                  />
-                  <div className="justify-center card-actions">
-                    <div className="badge badge-outline">Strength</div>
-                    <div className="badge badge-outline">Conditioning</div>
-                    <div className="badge badge-outline">Endurance</div>
-                  </div>
-                </div>
-              </div>
-              <div className="my-4 border border-gray-300 shadow-md card w-80 bg-base-100">
-                <div className="card-body">
-                  <h2 className="card-title">MilPrep</h2>
-                  <div className="badge badge-accent">COMING SOON</div>
-                  <p>
-                    Training focused on preparing for SFAS or RASP. High level
-                    of conditioning work, rucking, calisthenics, and strenght
-                    work paired with recovery.
-                  </p>
-                  <Generate
-                    userId={userId}
-                    activeProgram="Hybrid Athlete Base"
-                    disabled={true}
-                  />
-                  <div className="justify-center card-actions">
-                    <div className="badge badge-outline">Strength</div>
-                    <div className="badge badge-outline">Conditioning</div>
-                    <div className="badge badge-outline">Endurance</div>
-                  </div>
-                </div>
-              </div>
-              <div className="my-4 border border-gray-300 shadow-md card w-80 bg-base-100">
-                <div className="card-body">
-                  <h2 className="card-title">Road Warrior</h2>
-                  <div className="badge badge-accent">COMING SOON</div>
-                  <p>
-                    Bodyweight centered training for those without access to
-                    equipment.
-                  </p>
-                  <Generate
-                    userId={userId}
-                    activeProgram="Hybrid Athlete Base"
-                    disabled={true}
-                  />
-                  <div className="justify-center card-actions">
-                    <div className="badge badge-outline">Strength</div>
-                    <div className="badge badge-outline">Conditioning</div>
-                    <div className="badge badge-outline">Endurance</div>
-                  </div>
-                </div>
-              </div>
-              <div className="my-4 border border-gray-300 shadow-md w-80 card bg-base-100">
-                <div className="card-body">
-                  <h2 className="card-title">Pure Endurance</h2>
-                  <div className="badge badge-accent">COMING SOON</div>
-                  <p>
-                    Pure running-focused training to take you from a 5k to your
-                    first half marathon and beyond.
-                  </p>
-                  <Generate
-                    userId={userId}
-                    activeProgram="Hybrid Athlete Base"
-                    disabled={true}
-                  />
-                  <div className="justify-center card-actions">
-                    <div className="badge badge-outline">Conditioning</div>
-                    <div className="badge badge-outline">Endurance</div>
-                  </div>
-                </div>
-              </div>
-              <div className="my-4 mb-20 border border-gray-300 shadow-md card w-80 bg-base-100">
-                <div className="card-body">
-                  <h2 className="card-title">Raw Strength</h2>
-                  <div className="badge badge-accent">COMING SOON</div>
-                  <p>Pure strength + hypertrophy training.</p>
-                  <Generate
-                    userId={userId}
-                    activeProgram="Hybrid Athlete Base"
-                    disabled={true}
-                  />
-                  <div className="justify-center card-actions">
-                    <div className="badge badge-outline">Strength</div>
-                  </div>
-                </div>
-              </div>
+              <Hybrid userId={userId} active={false} />
+              <Milprep userId={userId} active={false} />
+              <RoadWarrior userId={userId} active={false} />
+              <PureEndurance userId={userId} active={false} />
+              <RawStrength userId={userId} active={false} />
             </div>
           </div>
         )}
