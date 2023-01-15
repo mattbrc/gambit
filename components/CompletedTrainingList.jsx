@@ -1,5 +1,3 @@
-import UpdateWorkout from "./UpdateWorkout";
-
 const TrainingCard = ({
   wd,
   day,
@@ -11,6 +9,10 @@ const TrainingCard = ({
   description,
   date,
 }) => {
+  const newDate = new Date(date);
+  const month = newDate.getMonth() + 1;
+  const dayDate = newDate.getDate();
+  const year = newDate.getFullYear();
 
   return (
     <div>
@@ -20,7 +22,7 @@ const TrainingCard = ({
             Week {week} Day {day}
           </h2>
           <h3>{name}</h3>
-          <p className="text-sm">{date}</p>
+          <p className="text-sm">{month}/{dayDate}/{year}</p>
           <div className="justify-center card-actions">
             <label htmlFor={wd} className="btn btn-accent">
               View workout

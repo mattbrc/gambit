@@ -147,7 +147,13 @@ export default function Homepage({ session }) {
                 <div className="card-body">
                   <p className="font-bold">{name}</p>
                   <p>@{username}</p>
-                  <p>Completed Workouts: {count}</p>
+
+                  <div className="stats stats-vertical">
+                    <div className="stat">
+                      <div className="stat-title">Completed Workouts</div>
+                      <div className="stat-value">{count}</div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
