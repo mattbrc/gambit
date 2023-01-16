@@ -6,6 +6,7 @@ import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import { Toaster } from "react-hot-toast";
 import { Analytics } from "@vercel/analytics/react";
+import Head from "next/head";
 
 function MyApp({ Component, pageProps }) {
   // create new client on every 1st render
@@ -18,6 +19,12 @@ function MyApp({ Component, pageProps }) {
       supabaseClient={supabase}
       initalSession={pageProps.initalSession}
     >
+      <Head>
+        <meta
+          name="viewport"
+          content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+      </Head>
       <Nav />
       <Component {...pageProps} />
       <Toaster />
