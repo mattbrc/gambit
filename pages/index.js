@@ -6,7 +6,8 @@ import {
 } from "@supabase/auth-helpers-react";
 import Homepage from "../components/Homepage";
 import { useEffect, useState } from "react";
-import NewData from "../data/NewData";
+import NewData2 from "../data/NewData";
+import EnduranceData from "../data/EnduranceData";
 
 export default function Home() {
   const session = useSession();
@@ -49,7 +50,8 @@ export default function Home() {
 
   return (
     <div>
-      {/* <NewData /> */}
+      {/* <NewData2 />
+      <EnduranceData /> */}
       <Homepage session={session} />
     </div>
   );

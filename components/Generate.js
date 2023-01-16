@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
 // change generate to accept active_program as a parameter
-const Generate = ({ userId, activeProgram, disabled }) => {
+const Generate = ({ userId, newProgram, disabled }) => {
   const [isGenerated, setIsGenerated] = useState(false);
   const supabase = useSupabaseClient();
   const id = userId;
@@ -23,10 +23,10 @@ const Generate = ({ userId, activeProgram, disabled }) => {
     }
   }
 
-  async function handleGenerate() {
+  async function handleGenerate(newProgram) {
     const updates = {
       id: userId,
-      active_program: activeProgram,
+      active_program: newProgram,
       next_workout: 0,
       updated_at: new Date().toISOString(),
     };
@@ -35,24 +35,24 @@ const Generate = ({ userId, activeProgram, disabled }) => {
     //   console.log("it's empty");
     // }
     let { error } = await supabase.from("user_training").upsert(updates);
-    //   if (error) throw error;
-    //   console.log("updating preferences...");
-    //   alert("New program started!");
+    if (error) throw error;
+    console.log(error);
     // } catch (error) {
     //   alert("Error updating the data!");
     //   console.log(error);
     // }
+    setIsGenerated(true);
   }
 
   // async function newUserTraining({ updates }) {
   //   let { error } = await supabase.from("user_training").insert(updates);
   // }
 
-  async function generateWorkouts() {
-    // upsert user_training table w/ new user
-    handleGenerate();
-    setIsGenerated(true);
-  }
+  // async function generateWorkouts() {
+  //   // upsert user_training table w/ new user
+  //   handleGenerate();
+  //   setIsGenerated(true);
+  // }
 
   return (
     <div>
@@ -61,7 +61,7 @@ const Generate = ({ userId, activeProgram, disabled }) => {
         className="my-2 btn btn-accent"
         disabled={disabled}
         onClick={() =>
-          toast.promise(generateWorkouts(), {
+          toast.promise(handleGenerate(newProgram), {
             loading: "Loading",
             success: "New program started!",
             error: "Error starting program",
@@ -81,16 +81,16 @@ const Generate = ({ userId, activeProgram, disabled }) => {
           </label>
           <h3 className="my-2 text-lg font-bold">Training Week</h3>
           <div>
-            {!isGenerated ? (
+            {/* {!isGenerated ? (
               <div>loading...</div>
-            ) : (
-              <div>
-                <h1>Workouts generated! Head to your dashboard to view.</h1>
-                <a className="my-4 btn" href="/dashboard">
-                  Dashboard
-                </a>
-              </div>
-            )}
+            ) : ( */}
+            <div>
+              <h1>Workouts generated! Head to your dashboard to view.</h1>
+              <a className="my-4 btn" href="/dashboard">
+                Dashboard
+              </a>
+            </div>
+            {/* )} */}
           </div>
         </div>
       </div>

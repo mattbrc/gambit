@@ -21,7 +21,7 @@ const Hybrid = ({ userId, active }) => {
                     </a>
                     </div>) : (<Generate
                     userId={userId}
-                    activeProgram="Hybrid Athlete Base"
+                    newProgram="Hybrid Athlete Base"
                   />)}
                   <div className="justify-center card-actions">
                     <div className="badge badge-outline">Strength</div>
@@ -55,7 +55,7 @@ export const Milprep = ({ userId, active }) => {
                     </a>
                     </div>) : (<Generate
             userId={userId}
-            activeProgram="Milprep"
+            newProgram="Mil Prep"
             disabled={true}
           />)}
           
@@ -89,7 +89,7 @@ export const RoadWarrior = ({ userId, active }) => {
                     </a>
                     </div>) : (<Generate
             userId={userId}
-            activeProgram="Road Warrior"
+            newProgram="Road Warrior"
             disabled={true}
           />)}
           
@@ -123,8 +123,8 @@ export const PureEndurance = ({ userId, active }) => {
                     </a>
                     </div>) : (<Generate
             userId={userId}
-            activeProgram="Pure Endurance"
-            disabled={true}
+            newProgram="Pure Endurance"
+            disabled={false}
           />)}
           <div className="justify-center card-actions">
             <div className="badge badge-outline">Conditioning</div>
@@ -152,7 +152,7 @@ export const RawStrength = ({ userId, active }) => {
                     </a>
                     </div>) : (<Generate
             userId={userId}
-            activeProgram="Raw Strength"
+            newProgram="Raw Strength"
             disabled={true}
           />)}
           <div className="justify-center card-actions">

@@ -68,6 +68,9 @@ const Nav = () => {
                     Guide
                   </a>
                 </li>
+                {/* <li>
+                  <a href="/start">Getting Started</a>
+                </li> */}
               </ul>
             </div>
             <a className="text-xl normal-case btn btn-ghost" href="/">
@@ -97,6 +100,9 @@ const Nav = () => {
                   Guide
                 </a>
               </li>
+              {/* <li>
+                <a href="/start">Getting Started</a>
+              </li> */}
             </ul>
           </div>
           <div className="navbar-end">

@@ -90,7 +90,7 @@ const TrainingList = ({ completedWorkoutId, handleComplete, program }) => {
   const sortedProgram = program.sort((a, b) => a.training_id - b.training_id);
 
   return (
-    <div className="training-list">
+    <div className="mb-10 training-list">
       {sortedProgram
         .filter((workout) => workout.training_id >= completedWorkoutId)
         .map((workout) => (

@@ -79,10 +79,9 @@ export default function Dashboard({ user, userData }) {
       if (data) {
         setData(data);
         setNextWorkout(userData.next_workout);
-        console.log(data[userData.next_workout]);
+        // console.log("data: ", data);
       }
       if (error) throw error;
-      console.log("retrieved workouts for your active program!");
     } catch (error) {
       console.log(error);
     } finally {
