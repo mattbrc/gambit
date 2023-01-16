@@ -110,7 +110,7 @@ const SignupForm = ({ name, username, user }) => {
                   name="name"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.name}
+                  value={values.name ? values.name : undefined}
                   type="text"
                   className="max-w-xs input input-bordered" />
                 <ErrorMessage name="name">{msg => <div className="text-sm text-red-400">{msg}</div>}</ErrorMessage>
@@ -121,7 +121,7 @@ const SignupForm = ({ name, username, user }) => {
                   name="username"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.username}
+                  value={values.username ? values.username : undefined}
                   type="text"
                   className="max-w-xs input input-bordered" />
                 <ErrorMessage name="username">{msg => <div className="text-sm text-red-400">{msg}</div>}</ErrorMessage>
