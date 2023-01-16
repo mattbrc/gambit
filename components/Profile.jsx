@@ -139,7 +139,7 @@ export default function Account({ user, userData }) {
 
   return (
     <div>
-      <SignupForm name={userData.full_name} username={userData.username} user={user} />
+      <SignupForm name={userData?.full_name || ""} username={userData?.username || ""} user={user} />
     </div>
   )
 }
