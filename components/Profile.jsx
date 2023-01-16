@@ -64,7 +64,7 @@ const SignupForm = ({ name, username, user }) => {
         <div className="justify-center avatar placeholder">
           <div className="w-16 rounded-full bg-neutral-focus text-neutral-content">
             <span className="text-3xl">
-              {name !== "" ? name.charAt(0).toUpperCase() : ""}
+              {name ? name.charAt(0).toUpperCase() : ""}
             </span>
           </div>
         </div>
