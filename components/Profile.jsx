@@ -70,7 +70,7 @@ const SignupForm = ({ name, username, user }) => {
         </div>
         <Formik
           validateOnChange={true}
-          initialValues={{ name: name, username: username }}
+          initialValues={{ name: name ? name : "", username: username ? username : ""}}
           validationSchema={yup.object({
             name: yup
               .string()
@@ -139,7 +139,7 @@ export default function Account({ user, userData }) {
 
   return (
     <div>
-      <SignupForm name={userData.full_name ? userData.full_name : ""} username={userData.username ? userData.username : ""} user={user} />
+      <SignupForm name={userData.full_name} username={userData.username} user={user} />
     </div>
   )
 }
