@@ -18,6 +18,7 @@ const TrainingCard = ({
   workout,
   trainingId,
   handleComplete,
+  nextWorkout,
 }) => {
   return (
     <div>
@@ -58,6 +59,7 @@ const TrainingCard = ({
                     <label
                       htmlFor={trainingId}
                       className="btn btn-sm btn-accent"
+                      disabled={trainingId == nextWorkout ? false : true}
                       onClick={() => {
                         toast.promise(handleComplete(), {
                           loading: "Loading",
@@ -106,6 +108,7 @@ const TrainingList = ({ completedWorkoutId, handleComplete, program }) => {
             workout={workout.training}
             trainingId={workout.training_id}
             handleComplete={handleComplete}
+            nextWorkout={completedWorkoutId}
           />
         ))}
     </div>
