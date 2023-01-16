@@ -6,7 +6,7 @@ import {
 } from "@supabase/auth-helpers-react";
 import Homepage from "../components/Homepage";
 import { useEffect, useState } from "react";
-import NewData2 from "../data/NewData";
+import NewData from "../data/NewData";
 import EnduranceData from "../data/EnduranceData";
 
 export default function Home() {
@@ -16,7 +16,7 @@ export default function Home() {
 
   return (
     <div>
-      <NewData2 />
+      <NewData />
     </div>
   );
 }
