@@ -14,7 +14,7 @@ const UpdateWorkout = ({ count, nextWorkout, activeProgram, workout }) => {
     addNextWorkout();
     addCompletedWorkout();
   }
-
+  
   async function addNextWorkout() {
     try {
       const updateNextWorkout = Number(nextWorkout) + 1;
