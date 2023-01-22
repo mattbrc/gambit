@@ -16,6 +16,7 @@
     "@supabase/supabase-js": "^2.2.1",
     "@vercel/analytics": "^0.1.6",
     "antd": "^5.1.0",
+    "axios": "^1.2.3",
     "daisyui": "^2.46.0",
     "formik": "^2.2.9",
     "next": "13.0.7",

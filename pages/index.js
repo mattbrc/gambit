@@ -6,8 +6,6 @@ import {
 } from "@supabase/auth-helpers-react";
 import Homepage from "../components/Homepage";
 import { useEffect, useState } from "react";
-import NewData2 from "../data/NewData";
-import EnduranceData from "../data/EnduranceData";
 
 export default function Home() {
   const session = useSession();
@@ -29,19 +27,10 @@ export default function Home() {
         <div className="w-full max-w-md px-10 mx-auto my-16">
           <Auth
             supabaseClient={supabase}
+            // onlyThirdPartyProviders={true}
             providers={["google"]}
             redirectTo={"/"}
-            appearance={{
-              theme: ThemeSupa,
-              variables: {
-                default: {
-                  colors: {
-                    brand: "#404040",
-                    brandAccent: "#52525b",
-                  },
-                },
-              },
-            }}
+            appearance={{ theme: ThemeSupa }}
             theme="dark"
           />
         </div>
@@ -50,8 +39,6 @@ export default function Home() {
 
   return (
     <div>
-      {/* <NewData2 />
-      <EnduranceData /> */}
       <Homepage session={session} />
     </div>
   );

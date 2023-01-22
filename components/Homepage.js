@@ -188,7 +188,7 @@ export default function Homepage({ session }) {
             <div className="grid place-items-center">
               <div className="w-80 divider"></div>
             </div>
-            <p className="text-xl font-bold">Available Programs</p>
+            <p className="text-xl font-bold">Training Library</p>
             <div className="flex flex-col items-center">
               <Hybrid userId={userId} active={false} />
               <Milprep userId={userId} active={false} />

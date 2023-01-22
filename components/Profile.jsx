@@ -7,6 +7,7 @@ import {
 } from "@supabase/auth-helpers-react";
 import { setRevalidateHeaders } from "next/dist/server/send-payload";
 import toast from 'react-hot-toast';
+import Integrations from "./Integrations";
 
 const SignupForm = ({ name, username, user }) => {
     const usernameRules = /^[a-zA-Z0-9]*$/;
@@ -140,6 +141,7 @@ export default function Account({ user, userData }) {
   return (
     <div>
       <SignupForm name={userData?.full_name || ""} username={userData?.username || ""} user={user} />
+      {/* <Integrations /> */}
     </div>
   )
 }
