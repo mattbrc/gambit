@@ -1,64 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { Formik, Form, useField, ErrorMessage } from "formik";
+import React from "react";
+import { Formik, Form, ErrorMessage } from "formik";
 import * as yup from "yup";
 import {
-  useUser,
+  
   useSupabaseClient,
 } from "@supabase/auth-helpers-react";
-import { setRevalidateHeaders } from "next/dist/server/send-payload";
 import toast from 'react-hot-toast';
 import Integrations from "./Integrations";
 
 const SignupForm = ({ name, username, user }) => {
     const usernameRules = /^[a-zA-Z0-9]*$/;
     const supabase = useSupabaseClient();
-    const [userData, setUserData] = useState();
-
-    async function updateProfile ({ newUsername, newName }) {
-      const updates = {
-        id: user.id,
-        username: newUsername,
-        name: newName,
-        updated_at: new Date().toISOString(),
-      }
-
-      await supabase.from('profiles').upsert(updates)
-      // try {
-      //   const updates = {
-      //     id: user.id,
-      //     username: newUsername,
-      //     name: newName,
-      //     updated_at: new Date().toISOString(),
-      //   }
-      //   let { error } = await supabase.from('profiles').upsert(updates)
-      //   if (error) throw error
-      //   alert('Profile updated!')
-      // } catch (error) {
-      //   alert('Error updating the data!')
-      //   console.log(error)
-      // }
-    }
-
-    async function getProfile () {
-      try {
-        let { data, error, status } = await supabase
-          .from('profiles')
-          .select(`username`)
-          .eq('id', user.id)
-          .single()
-
-        if (error && status !== 406) {
-          throw error
-        }
-
-        if (data) {
-          return(data);
-        }
-      } catch (error) {
-        alert('Error updating the data!')
-        console.log(error)
-      }
-    }
     
     return (
       <div>
@@ -85,9 +37,6 @@ const SignupForm = ({ name, username, user }) => {
           })}
           onSubmit={async (data, {setSubmitting}) => {
             setSubmitting(true);
-            // make async call
-            // updateProfile(data.username, data.name);
-            // const error = await supabase.from('profiles').upsert({ id: user.id, username: data.username, full_name: data.name})
             await toast.promise(
               supabase.from('profiles').upsert({ id: user.id, username: data.username, full_name: data.name}),
                {
@@ -136,12 +85,10 @@ const SignupForm = ({ name, username, user }) => {
   };
 
 export default function Account({ user, userData }) {
-  const supabase = useSupabaseClient();
-
   return (
     <div>
       <SignupForm name={userData?.full_name || ""} username={userData?.username || ""} user={user} />
-      {/* <Integrations /> */}
+      {/* <Integrations user={user} /> */}
     </div>
   )
 }

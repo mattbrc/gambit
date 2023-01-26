@@ -1,6 +1,5 @@
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import { useEffect, useState } from "react";
-import Generate from "./Generate";
 import { Oval } from "react-loader-spinner";
 import { FiEdit } from "react-icons/fi";
 import Link from "next/link";
@@ -9,6 +8,7 @@ import Hybrid, {
   RoadWarrior,
   PureEndurance,
   RawStrength,
+  Phraks,
 } from "./ProgramCards";
 
 function EditButton(props) {
@@ -71,8 +71,6 @@ export default function Homepage({ session }) {
       }
 
       if (data) {
-        console.log(data);
-        console.log(user.id);
         setUserId(user.id);
         setName(data.full_name);
         setUsername(data.username);
@@ -97,13 +95,11 @@ export default function Homepage({ session }) {
       }
 
       if (data && data.length > 0) {
-        console.log("data: ", data);
         setActiveProgram(data[0].active_program);
         setCount(data[0].completed_workouts);
       }
     } catch (error) {
-      // alert("Error loading user data!");
-      // console.log(error);
+      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -146,16 +142,16 @@ export default function Homepage({ session }) {
                 <div className="card-body">
                   <p className="font-bold">{name}</p>
                   <p>@{username}</p>
-                  <div className="stats stats-vertical">
+                  {/* <div className="stats stats-vertical">
                     <div className="stat">
                       <div className="stat-title">Completed Workouts</div>
                       <div className="stat-value">{count}</div>
                     </div>
-                  </div>
+                  </div> */}
+                  <p>Completed Workouts: {count}</p>
                 </div>
               </div>
             </div>
-
             {activeProgram === null || activeProgram === "" ? (
               <div>
                 <p></p>
@@ -173,7 +169,7 @@ export default function Homepage({ session }) {
                       "Pure Endurance": (
                         <PureEndurance userId={userId} active={true} />
                       ),
-                      "Mil Prep": <Milprep userId={userId} active={true} />,
+                      Milprep: <Milprep userId={userId} active={true} />,
                       "Raw Strength": (
                         <RawStrength userId={userId} active={true} />
                       ),
@@ -195,6 +191,7 @@ export default function Homepage({ session }) {
               <RoadWarrior userId={userId} active={false} />
               <PureEndurance userId={userId} active={false} />
               <RawStrength userId={userId} active={false} />
+              <Phraks userId={userId} active={false} />
             </div>
           </div>
         )}

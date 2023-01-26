@@ -18,7 +18,7 @@ const Nav = () => {
         <div className="navbar bg-base-100">
           <div className="navbar-start">
             <a className="text-xl normal-case btn btn-ghost">
-              Gambit <span className="pt-1 text-xs">v0.2.1</span>
+              Gambit <span className="pt-1 text-xs">v0.2.2</span>
             </a>
           </div>
         </div>
@@ -57,6 +57,9 @@ const Nav = () => {
                   <a className="text-zinc-400">Analytics</a>
                 </li>
                 <li>
+                  <a className="text-zinc-400">Nutrition</a>
+                </li>
+                <li>
                   <a href="/account">Account</a>
                 </li>
                 <li>
@@ -74,7 +77,7 @@ const Nav = () => {
               </ul>
             </div>
             <a className="text-xl normal-case btn btn-ghost" href="/">
-              Gambit <span className="pt-1 text-xs">v0.2.1</span>
+              Gambit <span className="pt-1 text-xs">v0.2.2</span>
             </a>
           </div>
           <div className="hidden navbar-center lg:flex">
@@ -87,6 +90,9 @@ const Nav = () => {
               </li>
               <li>
                 <a className="text-zinc-400">Analytics</a>
+              </li>
+              <li>
+                <a className="text-zinc-400">Nutrition</a>
               </li>
               <li>
                 <a href="/account">Account</a>

@@ -6,6 +6,7 @@ import {
 } from "@supabase/auth-helpers-react";
 import Homepage from "../components/Homepage";
 import { useEffect, useState } from "react";
+import MilprepData from "../data/MilprepData";
 
 export default function Home() {
   const session = useSession();
@@ -30,7 +31,17 @@ export default function Home() {
             // onlyThirdPartyProviders={true}
             providers={["google"]}
             redirectTo={"/"}
-            appearance={{ theme: ThemeSupa }}
+            appearance={{
+              theme: ThemeSupa,
+              variables: {
+                default: {
+                  colors: {
+                    brand: "#2E2E2E",
+                    brandAccent: "#2E2E2E",
+                  },
+                },
+              },
+            }}
             theme="dark"
           />
         </div>
@@ -39,6 +50,7 @@ export default function Home() {
 
   return (
     <div>
+      {/* <MilprepData /> */}
       <Homepage session={session} />
     </div>
   );

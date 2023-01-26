@@ -4,7 +4,6 @@ import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 
 export default function Account({ user, userData }) {
   const session = useSession();
-  console.log("userdata: ", userData);
 
   return (
     <div className="container text-center">
