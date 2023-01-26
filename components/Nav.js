@@ -56,9 +56,9 @@ const Nav = () => {
                 <li>
                   <a className="text-zinc-400">Analytics</a>
                 </li>
-                <li>
+                {/* <li>
                   <a className="text-zinc-400">Nutrition</a>
-                </li>
+                </li> */}
                 <li>
                   <a href="/account">Account</a>
                 </li>
@@ -91,9 +91,9 @@ const Nav = () => {
               <li>
                 <a className="text-zinc-400">Analytics</a>
               </li>
-              <li>
+              {/* <li>
                 <a className="text-zinc-400">Nutrition</a>
-              </li>
+              </li> */}
               <li>
                 <a href="/account">Account</a>
               </li>
