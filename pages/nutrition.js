@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import MilprepData from "../data/MilprepData";
 
 function Nutrition() {
   const supabase = useSupabaseClient();
@@ -52,6 +53,7 @@ function Nutrition() {
     <div>
       <p>Count: {data.count} runs</p>
       <p>Distance: {(data?.distance * 0.000621371).toFixed(1)} miles</p>
+      <MilprepData />
     </div>
   );
 }
