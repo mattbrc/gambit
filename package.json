@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@dicebear/collection": "^5.2.0",
+    "@dicebear/core": "^5.2.0",
     "@next/font": "13.0.7",
     "@supabase/auth-helpers-nextjs": "^0.5.2",
     "@supabase/auth-helpers-react": "^0.3.1",
@@ -17,10 +19,12 @@
     "@vercel/analytics": "^0.1.6",
     "antd": "^5.1.0",
     "axios": "^1.2.3",
+    "chart.js": "^4.2.1",
     "daisyui": "^2.46.0",
     "formik": "^2.2.9",
     "next": "13.0.7",
     "react": "18.2.0",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.4.0",
     "react-icons": "^4.7.1",

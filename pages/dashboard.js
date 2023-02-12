@@ -7,6 +7,8 @@ import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useState, useEffect } from "react";
 import { Oval } from "react-loader-spinner";
 import TrainingList from "../components/TrainingList";
+import { FiEdit } from "react-icons/fi";
+import Link from "next/link";
 import toast from "react-hot-toast";
 
 export default function Dashboard({ user, userData }) {
@@ -89,6 +91,14 @@ export default function Dashboard({ user, userData }) {
     }
   }
 
+  function EditButton(props) {
+    return (
+      <Link href="/account">
+        <FiEdit size={20} />
+      </Link>
+    );
+  }
+
   async function getDate() {
     const currentDay = new Date().getDate();
     const nameMonth = new Intl.DateTimeFormat("en-US", {
@@ -112,7 +122,7 @@ export default function Dashboard({ user, userData }) {
 
   return (
     <div>
-      <div className="pt-6 mx-4">
+      <div className="flex flex-col justify-between pt-6 mx-4">
         <h1 className="text-lg font-bold">Training Dashboard</h1>
         <p className="text-zinc-400">{date}</p>
       </div>
