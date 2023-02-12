@@ -53,9 +53,9 @@ const Nav = () => {
                 <li>
                   <a href="/dashboard">Dashboard</a>
                 </li>
-                <li>
+                {/* <li>
                   <a href="/analytics">Analytics</a>
-                </li>
+                </li> */}
                 <li>
                   <a href="/nutrition">Nutrition</a>
                 </li>
@@ -88,9 +88,9 @@ const Nav = () => {
               <li>
                 <a href="/dashboard">Dashboard</a>
               </li>
-              <li>
+              {/* <li>
                 <a href="/analytics">Analytics</a>
-              </li>
+              </li> */}
               <li>
                 <a href="/nutrition">Nutrition</a>
               </li>
