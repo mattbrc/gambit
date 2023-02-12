@@ -23,9 +23,9 @@ export default function Test() {
   return (
     <div>
       <ShareButton
-        title="My Webapp"
-        text="Check out this cool webapp!"
-        url="https://www.app.acidgambit.com"
+        title="Gambit Training App"
+        text="Check this app out!"
+        url="https://app.acidgambit.com"
       />
     </div>
   );
