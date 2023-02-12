@@ -29,7 +29,10 @@ const TrainingCard = ({
           </h2>
           <h3>{description}</h3>
           <div className="justify-center card-actions">
-            <label htmlFor={trainingId} className="btn btn-accent">
+            <label
+              htmlFor={trainingId}
+              className="border text-agGray btn bg-agGreen border-agGreen hover:text-agGreen"
+            >
               View workout
             </label>
             <input type="checkbox" id={trainingId} className="modal-toggle" />

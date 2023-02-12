@@ -12,7 +12,9 @@ module.exports = {
       center: true,
     },
     colors: {
-      agGreen: "#68CABE",
+      accentGreen: "#68CABE",
+      agGreen: "#75FBCD",
+      agGray: "#31363F",
     },
     extend: {
       backgroundImage: {

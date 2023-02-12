@@ -25,7 +25,7 @@ const Nav = () => {
 
     return (
       <a
-        className="px-4 py-2 font-bold text-white rounded cursor-pointer bg-agGreen hover:bg-blue-700"
+        className="px-4 py-2 font-bold rounded cursor-pointer text-agGray bg-agGreen border-agGreen hover:text-agGreen hover:bg-agGray"
         onClick={handleClick}
       >
         Share

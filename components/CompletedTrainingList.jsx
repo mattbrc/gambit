@@ -24,7 +24,7 @@ const TrainingCard = ({
           <h3>{name}</h3>
           <p className="text-sm">{month}/{dayDate}/{year}</p>
           <div className="justify-center card-actions">
-            <label htmlFor={wd} className="btn btn-accent">
+            <label htmlFor={wd} className="border text-agGray btn bg-agGreen border-agGreen hover:text-agGreen">
               View workout
             </label>
             <input type="checkbox" id={wd} className="modal-toggle" />
