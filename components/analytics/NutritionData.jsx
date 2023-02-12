@@ -197,13 +197,15 @@ export default function NutritionData({ user, userData }) {
               <p className='pt-2'>2. Katch-McArdle Equation: A more accurate equation utilizing your bodyfat %.</p>
               <p>BMR = 370 + (21.6 * LBM) where LBM is lean body mass.</p>
               <p className='pt-2'>These results are then multiplied by an activity level factor to determine your daily maintenance calories: </p>
-              <ul className='pt-2 text-left list-disc'>
-                <li className='py-1'>Sedentary (little to no exercise) = 1.2</li>
-                <li className='py-1'>Lightly Active (exercise 1-3 days/week) = 1.375</li>
-                <li className='py-1'>Moderately Active (train 3-5 days/week) = 1.55</li>
-                <li className='py-1'>Very Active (train 6-7 days / week) = 1.725</li>
-                <li className='py-1'>Athlete (train 2x/day, hard labor job) = 1.9</li>
-              </ul>
+              <div className='px-5'>
+                <ul className='pt-2 text-left list-disc'>
+                  <li className='py-1'>Sedentary (little to no exercise) = 1.2</li>
+                  <li className='py-1'>Lightly Active (exercise 1-3 days/week) = 1.375</li>
+                  <li className='py-1'>Moderately Active (train 3-5 days/week) = 1.55</li>
+                  <li className='py-1'>Very Active (train 6-7 days / week) = 1.725</li>
+                  <li className='py-1'>Athlete (train 2x/day, hard labor job) = 1.9</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
