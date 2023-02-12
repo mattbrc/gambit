@@ -13,7 +13,7 @@ const Hybrid = ({ userId, active }) => {
                   {active ? (
                   <div className="flex flex-col items-center">
                     <a
-                    className="w-40 my-4 btn btn-accent"
+                    className="w-40 my-4 border text-agGray btn bg-agGreen border-agGreen hover:text-agGreen"
                     href="/dashboard"
                     >
                         Dashboard
@@ -38,7 +38,7 @@ export const Milprep = ({ userId, active }) => {
         <div className="my-4 border border-gray-300 shadow-md card w-80 bg-base-100">
         <div className="card-body">
           <h2 className="card-title">Milprep</h2>
-          {active ? null : (<div className="badge badge-accent">NEW</div>)}
+          {active ? null : (<div className="badge badge-outline">NEW</div>)}
           {active ? null: (<p>
             Training focused on preparing for SFAS or RASP. High level
             of conditioning work, rucking, calisthenics, and strenght
@@ -47,7 +47,7 @@ export const Milprep = ({ userId, active }) => {
           {active ? (
                   <div className="flex flex-col items-center">
                     <a
-                    className="w-40 my-4 btn btn-accent"
+                    className="w-40 my-4 border text-agGray btn bg-agGreen border-agGreen hover:text-agGreen"
                     href="/dashboard"
                     >
                         Dashboard
@@ -73,7 +73,7 @@ export const RoadWarrior = ({ userId, active }) => {
         <div className="my-4 border border-gray-300 shadow-md card w-80 bg-base-100">
         <div className="card-body">
           <h2 className="card-title">Road Warrior</h2>
-          {active ? null : (<div className="badge badge-accent">COMING SOON</div>)}
+          {active ? null : (<div className="badge badge-outline">COMING SOON</div>)}
           {active ? null: (<p>
             Bodyweight centered training for those without access to
             equipment.
@@ -114,7 +114,7 @@ export const PureEndurance = ({ userId, active }) => {
           {active ? (
                   <div className="flex flex-col items-center">
                     <a
-                    className="w-40 my-4 btn btn-accent"
+                    className="w-40 my-4 border text-agGray btn bg-agGreen border-agGreen hover:text-agGreen"
                     href="/dashboard"
                     >
                         Dashboard
@@ -138,7 +138,7 @@ export const RawStrength = ({ userId, active }) => {
         <div className="my-4 border border-gray-300 shadow-md card w-80 bg-base-100">
         <div className="card-body">
           <h2 className="card-title">Raw Strength</h2>
-          {active ? null : (<div className="badge badge-accent">COMING SOON</div>)}
+          {active ? null : (<div className="badge badge-outline">COMING SOON</div>)}
           {active ? null: (<p>Pure strength + hypertrophy training.</p>)}
           {active ? (
                   <div className="flex flex-col items-center">
@@ -166,7 +166,7 @@ export const Phraks = ({ userId, active }) => {
       <div className="my-4 mb-20 border border-gray-300 shadow-md card w-80 bg-base-100">
       <div className="card-body">
         <h2 className="card-title">AG Phraks Variant to the Variant</h2>
-        {active ? null : (<div className="badge badge-accent">COMING SOON</div>)}
+        {active ? null : (<div className="badge badge-outline">COMING SOON</div>)}
         {active ? null: (<p>Minimal time approach to strength and conditioning.</p>)}
         {active ? (
                 <div className="flex flex-col items-center">

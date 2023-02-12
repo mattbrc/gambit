@@ -58,7 +58,7 @@ const Generate = ({ userId, newProgram, disabled }) => {
     <div>
       <label
         htmlFor="generate-workouts"
-        className="my-2 btn btn-accent"
+        className="my-2 border text-agGray btn bg-agGreen border-agGreen hover:text-agGreen"
         disabled={disabled}
         onClick={() =>
           toast.promise(handleGenerate(newProgram), {
