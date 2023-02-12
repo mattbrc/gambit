@@ -131,7 +131,6 @@ export default function Homepage({ session }) {
                 <div className="absolute right-2 top-2">
                   <EditButton />
                 </div>
-
                 <div className="justify-center mt-6 avatar placeholder">
                   <div className="w-16 rounded-full bg-neutral-focus text-neutral-content">
                     <span className="text-3xl">

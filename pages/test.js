@@ -1,23 +1,32 @@
-import { createAvatar } from "@dicebear/core";
-import MilprepData from "../data/MilprepData";
-import { initials } from "@dicebear/collection";
-// import { useEffect, useState, useMemo } from "react";
-
-export default function Test() {
-  // const avatar = useMemo(() => {
-  //   return createAvatar(initials, {
-  //     seed: "AG",
-  //     backgroundType: ["gradientLinear"],
-  //     backgroundColor: ["5e35b1"],
-  //     size: 64,
-  //     radius: 50,
-  //   }).toDataUriSync();
-  // }, []);
+const ShareButton = ({ title, text, url }) => {
+  const handleClick = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: title,
+        text: text,
+        url: url,
+      });
+    }
+  };
 
   return (
+    <button
+      className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
+      onClick={handleClick}
+    >
+      Share
+    </button>
+  );
+};
+
+export default function Test() {
+  return (
     <div>
-      {/* <MilprepData /> */}
-      {/* <img src={avatar} alt="Avatar" /> */}
+      <ShareButton
+        title="My Webapp"
+        text="Check out this cool webapp!"
+        url="https://www.app.acidgambit.com"
+      />
     </div>
   );
 }
