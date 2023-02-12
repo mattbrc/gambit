@@ -61,7 +61,7 @@ const TrainingCard = ({
                   <div className="flex flex-col items-center">
                     <label
                       htmlFor={trainingId}
-                      className="btn btn-sm btn-accent"
+                      className="border btn-sm text-agGray btn bg-agGreen border-agGreen hover:text-agGreen"
                       disabled={trainingId == nextWorkout ? false : true}
                       onClick={() => {
                         toast.promise(handleComplete(), {
