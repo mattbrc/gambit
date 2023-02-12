@@ -11,6 +11,9 @@ module.exports = {
     container: {
       center: true,
     },
+    colors: {
+      agGreen: "#68CABE",
+    },
     extend: {
       backgroundImage: {
         my_image: "url('../public/enter.png')",

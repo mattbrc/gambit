@@ -12,6 +12,27 @@ const Nav = () => {
     router.push("/");
   };
 
+  const ShareButton = ({ title, text, url }) => {
+    const handleClick = () => {
+      if (navigator.share) {
+        navigator.share({
+          title: title,
+          text: text,
+          url: url,
+        });
+      }
+    };
+
+    return (
+      <a
+        className="px-4 py-2 font-bold text-white rounded cursor-pointer bg-agGreen hover:bg-blue-700"
+        onClick={handleClick}
+      >
+        Share
+      </a>
+    );
+  };
+
   return (
     <div>
       {!user ? (
@@ -74,6 +95,13 @@ const Nav = () => {
                 {/* <li>
                   <a href="/start">Getting Started</a>
                 </li> */}
+                <li>
+                  <ShareButton
+                    title="Gambit Training App"
+                    text="Check this app out!"
+                    url="https://app.acidgambit.com"
+                  />
+                </li>
               </ul>
             </div>
             <a className="text-xl normal-case btn btn-ghost" href="/">
@@ -109,6 +137,13 @@ const Nav = () => {
               {/* <li>
                 <a href="/start">Getting Started</a>
               </li> */}
+              <li>
+                <ShareButton
+                  title="Gambit Training App"
+                  text="Check this app out!"
+                  url="https://app.acidgambit.com"
+                />
+              </li>
             </ul>
           </div>
           <div className="navbar-end">
