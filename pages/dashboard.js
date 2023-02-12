@@ -122,7 +122,7 @@ export default function Dashboard({ user, userData }) {
 
   return (
     <div>
-      <div className="flex flex-col justify-between pt-6 mx-4">
+      <div className="flex flex-col justify-between w-full max-w-lg px-4 pt-6 mx-auto">
         <h1 className="text-lg font-bold">Training Dashboard</h1>
         <p className="text-zinc-400">{date}</p>
       </div>

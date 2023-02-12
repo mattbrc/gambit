@@ -3,7 +3,7 @@ import Generate from './Generate';
 const Hybrid = ({ userId, active }) => {
     return (
       <div>
-        <div className="my-4 border border-gray-300 shadow-md card w-80 bg-base-100">
+        <div className="my-4 border shadow-sm border-borderGray card w-80 bg-base-100">
                 <div className="card-body">
                   <h2 className="card-title">Hybrid Athlete</h2>
                   {active ? null: (<p>
@@ -35,7 +35,7 @@ const Hybrid = ({ userId, active }) => {
 
 export const Milprep = ({ userId, active }) => {
     return (
-        <div className="my-4 border border-gray-300 shadow-md card w-80 bg-base-100">
+        <div className="my-4 border shadow-sm border-borderGray card w-80 bg-base-100">
         <div className="card-body">
           <h2 className="card-title">Milprep</h2>
           {active ? null : (<div className="badge badge-outline">NEW</div>)}
@@ -70,7 +70,7 @@ export const Milprep = ({ userId, active }) => {
 
 export const RoadWarrior = ({ userId, active }) => {
     return (
-        <div className="my-4 border border-gray-300 shadow-md card w-80 bg-base-100">
+        <div className="my-4 border shadow-sm border-borderGray card w-80 bg-base-100">
         <div className="card-body">
           <h2 className="card-title">Road Warrior</h2>
           {active ? null : (<div className="badge badge-outline">COMING SOON</div>)}
@@ -104,7 +104,7 @@ export const RoadWarrior = ({ userId, active }) => {
 
 export const PureEndurance = ({ userId, active }) => {
     return (
-        <div className="my-4 border border-gray-300 shadow-md w-80 card bg-base-100">
+        <div className="my-4 border shadow-sm border-borderGray w-80 card bg-base-100">
         <div className="card-body">
           <h2 className="card-title">Pure Endurance</h2>
           {active ? null: (<p>
@@ -135,7 +135,7 @@ export const PureEndurance = ({ userId, active }) => {
 
 export const RawStrength = ({ userId, active }) => {
     return (
-        <div className="my-4 border border-gray-300 shadow-md card w-80 bg-base-100">
+        <div className="my-4 border shadow-sm border-borderGray card w-80 bg-base-100">
         <div className="card-body">
           <h2 className="card-title">Raw Strength</h2>
           {active ? null : (<div className="badge badge-outline">COMING SOON</div>)}
@@ -163,7 +163,7 @@ export const RawStrength = ({ userId, active }) => {
 
 export const Phraks = ({ userId, active }) => {
   return (
-      <div className="my-4 mb-20 border border-gray-300 shadow-md card w-80 bg-base-100">
+      <div className="my-4 mb-20 border shadow-sm border-borderGray card w-80 bg-base-100">
       <div className="card-body">
         <h2 className="card-title">AG Phraks Variant to the Variant</h2>
         {active ? null : (<div className="badge badge-outline">COMING SOON</div>)}

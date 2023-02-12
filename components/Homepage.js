@@ -127,7 +127,7 @@ export default function Homepage({ session }) {
         ) : (
           <div>
             <div className="flex flex-col items-center my-6">
-              <div className="border border-gray-300 shadow-md card w-80 bg-base-100">
+              <div className="border shadow-sm border-borderGray card w-80 bg-base-100">
                 <div className="absolute right-2 top-2">
                   <EditButton />
                 </div>

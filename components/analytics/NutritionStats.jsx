@@ -30,7 +30,7 @@ const MacronutrientContainer = ({ calories, header }) => {
   };
 
   return (
-    <div className="p-4 bg-white border rounded-lg border-slate-200">
+    <div className="p-4 bg-white border rounded-lg border-borderGray">
       <h2 className="text-xl font-bold">{header}:</h2>
       <p className="pt-2 text-sm">Your daily goal is {calories} calories.</p>
       <div className="my-2">
