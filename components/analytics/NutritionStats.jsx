@@ -9,7 +9,7 @@ const MacronutrientContainer = ({ calories, header }) => {
   const fats = Math.round((calories * 0.30) / 9);
 
   const data = {
-    labels: ['Carbs', 'Protein', 'Fats'],
+    labels: ['40% Carbs', '30% Protein', '30% Fats'],
     datasets: [
       {
         label: '# of Votes',
@@ -51,7 +51,6 @@ const NutritionStats = (props) => {
     <div className='w-full max-w-4xl px-10 mx-auto'>
       <div>
           <p className="py-2 text-2xl font-bold text-center">Your Stats:</p>
-          <p>40% Carbs/30% Protein/30% Fats</p>
           <div className="flex flex-wrap justify-center">
           <div className="w-full px-2 py-3 md:w-1/3">
             <MacronutrientContainer
