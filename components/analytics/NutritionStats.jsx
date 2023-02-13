@@ -12,7 +12,7 @@ const MacronutrientContainer = ({ calories, header }) => {
     labels: ['40% Carbs', '30% Protein', '30% Fats'],
     datasets: [
       {
-        label: '# of Votes',
+        label: '# of grams',
         data: [carbs, protein, fats],
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
