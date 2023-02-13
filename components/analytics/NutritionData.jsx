@@ -42,7 +42,7 @@ const Nutrition = ({ user, gender, activityLevel, age, calories, bodyfat, height
     <div>
       <Formik
         validateOnChange={true}
-        initialValues={{ height: height ? height : "", weight: weight ? weight : "", age: age ? age: "", activityLevel: activityLevel ? activityLevel : "", bodyfat: bodyfat ? bodyfat : "", gender: gender ? gender: ""}}
+        initialValues={{ height: height ? height : "", weight: weight ? weight : "", age: age ? age: "", activityLevel: activityLevel ? activityLevel : "", bodyfat: bodyfat ? bodyfat : "", gender: gender ? gender: "" }}
         validationSchema={yup.object({
           height: yup
             .string()
@@ -71,7 +71,7 @@ const Nutrition = ({ user, gender, activityLevel, age, calories, bodyfat, height
           const calories = tdee(data.height, data.weight, data.activityLevel, data.age, data.gender, data.bodyfat);
           setCals(calories);
           await toast.promise(
-            supabase.from('nutrition').upsert({ id: user.id, height: data.height, weight: data.weight, activity_level: data.activityLevel, age: data.age, gender: data.gender, bodyfat: data.bodyfat, calories: calories}),
+            supabase.from('nutrition').upsert({ id: user.id, height: data.height, weight: data.weight, activity_level: data.activityLevel, age: data.age, gender: data.gender, bodyfat: data.bodyfat, calories: calories }),
               {
                 loading: 'Updating...',
                 success: <b>Nutrition Calculated!</b>,
@@ -96,7 +96,7 @@ const Nutrition = ({ user, gender, activityLevel, age, calories, bodyfat, height
                 value={values.height ? values.height : ""}
                 type="text"
                 className="max-w-xs input input-bordered" />
-              <ErrorMessage name="height">{msg => <div className="pt-1 text-sm text-red-400">{msg}</div>}</ErrorMessage>
+              <ErrorMessage name="height">{msg => <div className="pt-1 text-sm text-red">{msg}</div>}</ErrorMessage>
               <label className="label">
                 <span className="label-text">Weight (pounds)</span>
               </label>
@@ -107,7 +107,7 @@ const Nutrition = ({ user, gender, activityLevel, age, calories, bodyfat, height
                 value={values.weight ? values.weight : ""}
                 type="text"
                 className="max-w-xs input input-bordered" />
-              <ErrorMessage name="weight">{msg => <div className="pt-1 text-sm text-red-400">{msg}</div>}</ErrorMessage>
+              <ErrorMessage name="weight">{msg => <div className="pt-1 text-sm text-red">{msg}</div>}</ErrorMessage>
               <label className="label">
                 <span className="label-text">Age</span>
               </label>
@@ -118,7 +118,7 @@ const Nutrition = ({ user, gender, activityLevel, age, calories, bodyfat, height
                 value={values.age ? values.age : ""}
                 type="text"
                 className="max-w-xs input input-bordered" />
-              <ErrorMessage name="age">{msg => <div className="pt-1 text-sm text-red-400">{msg}</div>}</ErrorMessage>
+              <ErrorMessage name="age">{msg => <div className="pt-1 text-sm text-red">{msg}</div>}</ErrorMessage>
               <label className="label">
                 <span className="label-text">Activity Level</span>
               </label>
@@ -135,7 +135,7 @@ const Nutrition = ({ user, gender, activityLevel, age, calories, bodyfat, height
                 <option value="1.725">Heavy Exercise (6-7 days/week)</option>
                 <option value="1.9">Athlete (2x/day)</option>
               </select>
-              <ErrorMessage name="activityLevel">{msg => <div className="pt-1 text-sm text-red-400">{msg}</div>}</ErrorMessage>
+              <ErrorMessage name="activityLevel">{msg => <div className="pt-1 text-sm text-red">{msg}</div>}</ErrorMessage>
               <label className="label">
                 <span className="label-text">Bodyfat % (optional for improved accuracy)</span>
               </label>
@@ -146,7 +146,7 @@ const Nutrition = ({ user, gender, activityLevel, age, calories, bodyfat, height
                 value={values.bodyfat ? values.bodyfat : ""}
                 type="text"
                 className="max-w-xs input input-bordered"/>
-              <ErrorMessage name="bodyfat">{msg => <div className="pt-1 text-sm text-red-400">{msg}</div>}</ErrorMessage>
+              <ErrorMessage name="bodyfat">{msg => <div className="pt-1 text-sm text-red">{msg}</div>}</ErrorMessage>
               <label className="label">
                 <span className="label-text">Gender</span>
               </label>
@@ -160,7 +160,7 @@ const Nutrition = ({ user, gender, activityLevel, age, calories, bodyfat, height
                 <option>Male</option>
                 <option>Female</option>
               </select>
-              <ErrorMessage name="gender">{msg => <div className="pt-1 text-sm text-red-400">{msg}</div>}</ErrorMessage>
+              <ErrorMessage name="gender">{msg => <div className="pt-1 text-sm text-red">{msg}</div>}</ErrorMessage>
             </div>
             <button disabled={isSubmitting} type="submit" className="my-4 btn">Calculate</button>
           </Form>
@@ -168,6 +168,7 @@ const Nutrition = ({ user, gender, activityLevel, age, calories, bodyfat, height
       </Formik>
       {cals && 
         <div>
+          <p></p>
           <div className="grid place-items-center">
             <div className="w-80 divider"></div>
           </div>

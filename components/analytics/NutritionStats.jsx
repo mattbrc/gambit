@@ -2,14 +2,14 @@ import React from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 
-const MacronutrientContainer = ({ calories, header }) => {
+const MacronutrientContainer = ({ calories, header, carbPercent, proPercent, fatPercent }) => {
   ChartJS.register(ArcElement, Tooltip, Legend);
-  const carbs = Math.round((calories * 0.40) / 4);
-  const protein = Math.round((calories * 0.30) / 4);
-  const fats = Math.round((calories * 0.30) / 9);
+  const carbs = Math.round((calories * carbPercent) / 4);
+  const protein = Math.round((calories * proPercent) / 4);
+  const fats = Math.round((calories * fatPercent) / 9);
 
   const data = {
-    labels: ['40% Carbs', '30% Protein', '30% Fats'],
+    labels: [`${carbPercent.substr(2)}% Carbs`, `${proPercent.substr(2)}% Protein`, `${fatPercent.substr(2)}% Fats`],
     datasets: [
       {
         label: '# of grams',
@@ -44,6 +44,7 @@ const MacronutrientContainer = ({ calories, header }) => {
 };
 
 const NutritionStats = (props) => {
+  console.log("props: ", props);
   const maintenanceCalories = parseInt(props.calories);
   const cuttingCalories = parseInt(props.calories) - 500;
   const bulkingCalories = parseInt(props.calories) + 500;
@@ -56,27 +57,27 @@ const NutritionStats = (props) => {
             <MacronutrientContainer
               header="Maintenance"
               calories={maintenanceCalories}
-              fats="70"
-              protein="140"
-              carbs="210"
+              fatPercent="0.30"
+              proPercent="0.30"
+              carbPercent="0.40"
             />
           </div>
           <div className="w-full px-2 py-3 md:w-1/3">
             <MacronutrientContainer
               header="Cutting"
               calories={cuttingCalories}
-              fats="50"
-              protein="120"
-              carbs="170"
+              fatPercent="0.30"
+              proPercent="0.30"
+              carbPercent="0.40"
             />
           </div>
           <div className="w-full px-2 py-3 md:w-1/3">
             <MacronutrientContainer
               header="Bulking"
               calories={bulkingCalories}
-              fats="90"
-              protein="180"
-              carbs="270"
+              fatPercent="0.30"
+              proPercent="0.30"
+              carbPercent="0.40"
             />
           </div>
         </div>

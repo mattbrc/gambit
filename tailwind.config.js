@@ -16,6 +16,7 @@ module.exports = {
       agGreen: "#75FBCD",
       agGray: "#31363F",
       borderGray: "	#e2e8f0",
+      red: "#f87171",
     },
     extend: {
       backgroundImage: {
