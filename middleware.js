@@ -19,11 +19,11 @@ export async function middleware(req) {
 
   // Auth condition not met, redirect to signin page.
   const redirectUrl = req.nextUrl.clone();
-  redirectUrl.pathname = "/";
+  redirectUrl.pathname = "/signin";
   redirectUrl.searchParams.set(`next`, req.nextUrl.pathname);
   return NextResponse.redirect(redirectUrl);
 }
 
 export const config = {
-  matcher: ["/past", "/dashboard", "/account", "/analytics", "/nutrition"],
+  matcher: ["/past", "/dashboard", "/account", "/analytics", "/nutrition", "/"],
 };
