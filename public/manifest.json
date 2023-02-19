@@ -1,9 +1,9 @@
 {
   "theme_color": "#6DE5B5",
   "background_color": "#403F3F",
-  "display": "fullscreen",
+  "display": "standalone",
   "scope": "/",
-  "start_url": "/",
+  "start_url": "https://app.acidgambit.com/",
   "name": "Gambit",
   "short_name": "Gambit",
   "description": "Gambit Training App",
@@ -27,6 +27,12 @@
       "src": "/icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
+    },
+    {
+      "src": "/icons/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
