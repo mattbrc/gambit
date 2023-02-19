@@ -22,31 +22,31 @@ export default function Home() {
     if (user) loadData();
   }, [user]);
 
-  // if (!user)
-  //   return (
-  //     <div>
-  //       <div className="w-full max-w-md px-10 mx-auto my-16">
-  //         <Auth
-  //           supabaseClient={supabase}
-  //           // onlyThirdPartyProviders={true}
-  //           providers={["google"]}
-  //           redirectTo={"http://localhost:3000/nutrition/"}
-  //           appearance={{
-  //             theme: ThemeSupa,
-  //             variables: {
-  //               default: {
-  //                 colors: {
-  //                   brand: "#2E2E2E",
-  //                   brandAccent: "#2E2E2E",
-  //                 },
-  //               },
-  //             },
-  //           }}
-  //           theme="dark"
-  //         />
-  //       </div>
-  //     </div>
-  //   );
+  if (!user)
+    return (
+      <div>
+        <div className="w-full max-w-md px-10 mx-auto my-16">
+          <Auth
+            supabaseClient={supabase}
+            // onlyThirdPartyProviders={true}
+            providers={["google"]}
+            redirectTo={"/"}
+            appearance={{
+              theme: ThemeSupa,
+              variables: {
+                default: {
+                  colors: {
+                    brand: "#2E2E2E",
+                    brandAccent: "#2E2E2E",
+                  },
+                },
+              },
+            }}
+            theme="dark"
+          />
+        </div>
+      </div>
+    );
 
   return (
     <div>
