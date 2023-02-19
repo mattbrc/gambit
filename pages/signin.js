@@ -30,7 +30,7 @@ export default function Home() {
             supabaseClient={supabase}
             // onlyThirdPartyProviders={true}
             providers={["google"]}
-            redirectTo={"/home/"}
+            redirectTo={"/"}
             appearance={{
               theme: ThemeSupa,
               variables: {
