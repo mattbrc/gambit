@@ -1,15 +1,15 @@
-/** @type {import('next').NextConfig} */
+// /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
 };
 
-module.exports = nextConfig;
+// module.exports = nextConfig;
 
-// /** @type {import('next').NextConfig} */
-// const withPWA = require("next-pwa")({
-//   dest: "public",
-// });
+/** @type {import('next').NextConfig} */
+const withPWA = require("next-pwa")({
+  dest: "public",
+});
 
-// module.exports = withPWA({
-//   // config
-// });
+module.exports = withPWA({
+  // config
+});
