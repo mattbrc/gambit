@@ -12,7 +12,7 @@ export default function Document() {
       <meta name="format-detection" content="telephone=no" />
       <meta name="mobile-web-app-capable" content="yes" />
       <meta name="msapplication-tap-highlight" content="no" />
-      <meta name="theme-color" content="#000000" />
+      <meta name="theme-color" content="#ffffff" />
 
       <link rel="manifest" href="/manifest.json" />
       <link rel="apple-touch-icon" href="/icons/apple-touch.icon.png" />
