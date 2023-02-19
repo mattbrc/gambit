@@ -2,14 +2,6 @@ import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import NutritionData from "../components/analytics/NutritionData";
 
-// write me a react component to display a form to submit a new nutrition entry to the database that takes in the following fields:
-// bodyweight, activity level, age, male/female, and body fat percentage (optional) and then calculates the following:
-// 1. BMR (basal metabolic rate)
-// 2. TDEE (total daily energy expenditure)
-// 3. Macros (protein, carbs, fat)
-// 4. Calories
-// 5. Calories from protein, carbs, fat
-
 export default function Nutrition({ user, userData }) {
   // const refresh = "441a09e0e70a748e8743afcdfebe8dac0783adb7";
   // const refresh = "7e5aca9d02edef134c3c8177b6f455fcd25cd106";
