@@ -6,7 +6,7 @@ import {
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useState, useEffect } from "react";
 import { Oval } from "react-loader-spinner";
-import TrainingList from "../components/TrainingList";
+import TrainingList from "../components/training/TrainingList";
 import { FiEdit } from "react-icons/fi";
 import Link from "next/link";
 import toast from "react-hot-toast";

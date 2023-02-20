@@ -4,7 +4,7 @@ import {
   useSession,
   useSupabaseClient,
 } from "@supabase/auth-helpers-react";
-import Homepage from "../components/Homepage";
+import Homepage from "../components/site/Homepage";
 import { useEffect, useState } from "react";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import MilprepData from "../data/MilprepData";

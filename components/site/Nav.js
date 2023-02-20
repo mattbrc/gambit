@@ -160,7 +160,7 @@ const Nav = () => {
           </div>
           <div className="navbar-end">
             <div className="tooltip tooltip-bottom" data-tip="coming soon!">
-              <a>
+              <a href="/add">
                 <TbSquarePlus size="1.4rem" />
               </a>
             </div>

@@ -6,7 +6,7 @@ import {
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useState, useEffect } from "react";
 import { Oval } from "react-loader-spinner";
-import CompletedTrainingList from "../components/CompletedTrainingList";
+import CompletedTrainingList from "../components/training/CompletedTrainingList";
 
 export default function Dashboard({ user, userData }) {
   const session = useSession();

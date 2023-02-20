@@ -1,5 +1,5 @@
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
-import Profile from "../components/Profile";
+import Profile from "../components/site/Profile";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 
 export default function Account({ user, userData }) {

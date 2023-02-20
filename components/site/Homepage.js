@@ -9,7 +9,7 @@ import Hybrid, {
   PureEndurance,
   RawStrength,
   Phraks,
-} from "./ProgramCards";
+} from "../training/ProgramCards";
 
 function EditButton(props) {
   return (
