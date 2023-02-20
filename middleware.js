@@ -19,7 +19,7 @@ export async function middleware(req) {
 
   // Auth condition not met, redirect to signin page.
   const redirectUrl = req.nextUrl.clone();
-  redirectUrl.pathname = "/signin";
+  redirectUrl.pathname = "/";
   redirectUrl.searchParams.set(`next`, req.nextUrl.pathname);
   return NextResponse.redirect(redirectUrl);
 }
