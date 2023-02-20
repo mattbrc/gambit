@@ -16,7 +16,7 @@ const TrainingCard = ({
 
   return (
     <div>
-      <div className="w-full max-w-3xl px-2 mx-auto my-4 border shadow-sm border-borderGray rounded-xl bg-base-100">
+      <div className="px-2 mx-auto my-4 border shadow-sm w-88 border-borderGray rounded-xl bg-base-100">
         <div className="card-body">
           <h2 className="card-title">
             Week {week} Day {day}

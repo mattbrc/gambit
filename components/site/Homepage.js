@@ -127,8 +127,8 @@ export default function Homepage({ session }) {
         ) : (
           <div>
             <div className="flex flex-col items-center my-6">
-              <div className="border shadow-sm border-borderGray card w-80 bg-base-100">
-                <div className="grid grid-cols-3 p-2 place-items-center">
+              <div className="border shadow-sm border-borderGray card w-88 bg-base-100">
+                <div className="grid grid-cols-3 p-2 pt-3 place-items-center">
                   {/* <div className="absolute right-2 top-2">
                   <EditButton />
                 </div> */}
@@ -147,7 +147,7 @@ export default function Homepage({ session }) {
                   </div>
                   <div className="text-center">
                     <p className="text-xs">level</p>
-                    <p className="text-xl font-bold">1</p>
+                    <p className="text-2xl font-bold">1</p>
                   </div>
                   <div className="col-span-3 pt-3">
                     <p className="text-sm">Level Progress</p>
@@ -171,7 +171,7 @@ export default function Homepage({ session }) {
               </div>
             ) : (
               <div>
-                <p className="text-xl font-bold">My Active Program</p>
+                <p className="text-lg font-bold">My Active Program</p>
                 <div className="flex flex-col items-center">
                   {/* <Hybrid userId={userId} active={true} /> */}
                   {
@@ -197,7 +197,7 @@ export default function Homepage({ session }) {
             <div className="grid place-items-center">
               <div className="w-80 divider"></div>
             </div>
-            <p className="text-xl font-bold">Training Library</p>
+            <p className="text-lg font-bold">Training Library</p>
             <div className="flex flex-col items-center">
               <Hybrid userId={userId} active={false} />
               <Milprep userId={userId} active={false} />

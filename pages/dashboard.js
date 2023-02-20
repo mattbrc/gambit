@@ -154,7 +154,7 @@ export default function Dashboard({ user, userData }) {
                 />
               </div>
             ) : (
-              <div>
+              <div className="flex flex-col items-center">
                 <TrainingList
                   handleComplete={handleComplete}
                   completedWorkoutId={completedWorkoutId}

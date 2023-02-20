@@ -38,6 +38,9 @@ module.exports = {
       backgroundImage: {
         my_image: "url('../public/enter.png')",
       },
+      width: {
+        88: "22rem",
+      },
     },
   },
   plugins: [require("@tailwindcss/typography"), require("daisyui")],

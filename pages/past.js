@@ -100,7 +100,7 @@ export default function Dashboard({ user, userData }) {
                 />
               </div>
             ) : (
-              <div>
+              <div className="flex flex-col items-center">
                 <CompletedTrainingList program={data} />
               </div>
             )}
