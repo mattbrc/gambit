@@ -128,26 +128,40 @@ export default function Homepage({ session }) {
           <div>
             <div className="flex flex-col items-center my-6">
               <div className="border shadow-sm border-borderGray card w-80 bg-base-100">
-                {/* <div className="absolute right-2 top-2">
+                <div className="grid grid-cols-3 p-2 place-items-center">
+                  {/* <div className="absolute right-2 top-2">
                   <EditButton />
                 </div> */}
-                <div className="justify-center mt-6 avatar placeholder">
-                  <div className="w-16 rounded-full bg-neutral-focus text-neutral-content">
-                    <span className="text-3xl">
-                      {name ? name.charAt(0).toUpperCase() : ""}
-                    </span>
-                  </div>
-                </div>
-                <div className="card-body">
-                  <p className="font-bold">{name}</p>
-                  <p>@{username}</p>
-                  {/* <div className="stats stats-vertical">
-                    <div className="stat">
-                      <div className="stat-title">Completed Workouts</div>
-                      <div className="stat-value">{count}</div>
+                  <div className="flex content-center justify-start col-span-1 avatar placeholder">
+                    <div className="w-12 rounded-full bg-neutral-focus text-neutral-content">
+                      <span className="text-2xl">
+                        {name ? name.charAt(0).toUpperCase() : ""}
+                      </span>
                     </div>
+                  </div>
+                  <div className="text-left">
+                    <p className="font-bold">{name}</p>
+                    <p className="text-sm border rounded-md bg-borderGray border-borderGray">
+                      @{username}
+                    </p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-xs">level</p>
+                    <p className="text-xl font-bold">1</p>
+                  </div>
+                  <div className="col-span-3 pt-3">
+                    <p className="text-sm">Level Progress</p>
+                    <progress
+                      className="w-56 progress progress-accent"
+                      value="10"
+                      max="100"
+                    ></progress>
+                  </div>
+                  {/* <div className="card-body">
+                    <p className="font-bold">{name}</p>
+                    <p>@{username}</p>
+                    <p>Completed Workouts: {count}</p>
                   </div> */}
-                  <p>Completed Workouts: {count}</p>
                 </div>
               </div>
             </div>
