@@ -218,6 +218,10 @@ const Nav = () => {
                     You can get back to this screen at any time by clicking the
                     icon in the top right and clicking "quick help".
                   </li>
+                  <li className="py-2 underline">
+                    For a better app experience, click the share button on
+                    safari on IOS, then click "add to home screen".
+                  </li>
                   <li className="py-2">
                     Start by updating your name, username, and training goals in
                     your{" "}
