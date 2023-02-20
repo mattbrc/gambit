@@ -9,7 +9,7 @@ const Nav = () => {
 
   const handleSignOut = () => {
     supabase.auth.signOut();
-    router.push("/signin");
+    router.push("/");
   };
 
   const ShareButton = ({ title, text, url }) => {

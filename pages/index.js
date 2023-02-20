@@ -6,6 +6,7 @@ import {
 } from "@supabase/auth-helpers-react";
 import Homepage from "../components/Homepage";
 import { useEffect, useState } from "react";
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import MilprepData from "../data/MilprepData";
 
 export default function Home() {
@@ -30,7 +31,6 @@ export default function Home() {
             supabaseClient={supabase}
             // onlyThirdPartyProviders={true}
             providers={["google"]}
-            redirectTo={"/"}
             appearance={{
               theme: ThemeSupa,
               variables: {
