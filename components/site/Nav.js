@@ -160,7 +160,7 @@ const Nav = () => {
           </div>
           <div className="navbar-end">
             <div className="tooltip tooltip-bottom" data-tip="coming soon!">
-              <a>
+              <a href="/add">
                 <TbSquarePlus size="1.4rem" />
               </a>
             </div>
@@ -180,18 +180,87 @@ const Nav = () => {
                   <a href="/account">Profile</a>
                 </li>
                 <li>
+                  <label htmlFor="help-modal">Quick Help</label>
+                </li>
+                <li>
                   <a onClick={handleSignOut}>Sign Out</a>
                 </li>
               </ul>
             </div>
           </div>
-          {/* <div className="navbar-end">
-            <a className="btn btn-outline" onClick={handleSignOut}>
-              Sign Out
-            </a>
-          </div> */}
         </div>
       )}
+      {/* Quick Help Modal
+      Below the modal link to keep out of the drop down */}
+      <input type="checkbox" id="help-modal" className="modal-toggle" />
+      <div className="modal">
+        <div className="relative modal-box">
+          <label
+            htmlFor="help-modal"
+            className="absolute btn btn-sm btn-circle right-2 top-2"
+          >
+            ✕
+          </label>
+          <div className="text-center">
+            <p className="py-1 text-lg font-bold">👋 Quick Help</p>
+            <div className="text-sm">
+              <p>Welcome to the Gambit App!</p>
+              <p>Here are a few pointers to get you started:</p>
+              <div className="text-left">
+                <ul className="list-decimal list-inside">
+                  <li className="py-2">
+                    You can get back to this screen at any time by clicking the
+                    icon in the top right and clicking "quick help".
+                  </li>
+                  <li className="py-2">
+                    Start by updating your name, username, and training goals in
+                    your{" "}
+                    <a className="font-bold underline" href="/account">
+                      profile
+                    </a>
+                    .
+                  </li>
+                  <li className="py-2">
+                    You can select a training program by selecting one from the
+                    training library on the{" "}
+                    <a className="font-bold underline" href="/">
+                      homepage
+                    </a>
+                    .
+                  </li>
+                  <li className="py-2">
+                    You can access your training at any time by going to your{" "}
+                    <a className="font-bold underline" href="/dashboard">
+                      training dashboard
+                    </a>
+                    .
+                  </li>
+                  <li className="py-2">
+                    You can complete your first workout by going to your
+                    dashboard, clicking "view workout" and "complete workout".
+                  </li>
+                  <li className="py-2">
+                    You can find out your calorie needs and macros by going to{" "}
+                    <a className="font-bold underline" href="/nutrition">
+                      nutrition
+                    </a>
+                    .
+                  </li>
+                  <li className="py-2">
+                    You can add a custom workout at any time by clicking the +
+                    sign in the top right.
+                  </li>
+                  <li className="py-2">
+                    You can find out detailed information on programming,
+                    nutrition, training fundamentals, and more in the guide by
+                    clicking the menu in the top left and clicking Guide.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

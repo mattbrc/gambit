@@ -153,7 +153,7 @@ export default function Homepage({ session }) {
                     <p className="text-sm">Level Progress</p>
                     <progress
                       className="w-56 progress progress-accent"
-                      value="10"
+                      value="5"
                       max="100"
                     ></progress>
                   </div>
