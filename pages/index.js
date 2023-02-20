@@ -50,7 +50,6 @@ export default function Home() {
 
   return (
     <div>
-      {/* <MilprepData /> */}
       <Homepage session={session} />
     </div>
   );

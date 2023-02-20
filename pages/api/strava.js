@@ -24,8 +24,6 @@ const handler = async (req, res) => {
 
   const reAuthJson = await reauthorizeResponse.json();
 
-  //   const athleteId = 7445195;
-
   const response = await fetch(
     `https://www.strava.com/api/v3/athletes/${athleteId}/stats?access_token=${reAuthJson.access_token}`
   );
