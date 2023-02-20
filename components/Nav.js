@@ -1,6 +1,7 @@
 import { useUser } from "@supabase/auth-helpers-react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
+import { TbSquarePlus } from "react-icons/tb";
 
 const Nav = () => {
   const router = useRouter();
@@ -39,7 +40,7 @@ const Nav = () => {
         <div className="navbar bg-base-100">
           <div className="navbar-start">
             <a className="text-xl normal-case btn btn-ghost">
-              Gambit <span className="pt-1 text-xs">v0.3.0</span>
+              Gambit <span className="pt-1 text-xs">v0.4.0</span>
             </a>
           </div>
         </div>
@@ -67,21 +68,14 @@ const Nav = () => {
                 tabIndex={0}
                 className="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
               >
-                {/* mobile display */}
-                <li>
-                  <a href="/">Home</a>
-                </li>
                 <li>
                   <a href="/dashboard">Dashboard</a>
                 </li>
                 {/* <li>
-                  <a href="/analytics">Analytics</a>
+                  <a>Analytics</a>
                 </li> */}
                 <li>
                   <a href="/nutrition">Nutrition</a>
-                </li>
-                <li>
-                  <a href="/account">Profile</a>
                 </li>
                 <li>
                   <a
@@ -105,25 +99,19 @@ const Nav = () => {
               </ul>
             </div>
             <a className="text-xl normal-case btn btn-ghost" href="/">
-              Gambit <span className="pt-1 text-xs">v0.3.0</span>
+              Gambit <span className="pt-1 text-xs">v0.4.0</span>
             </a>
           </div>
           <div className="hidden navbar-center lg:flex">
             <ul className="px-1 menu menu-horizontal">
               <li>
-                <a href="/">Home</a>
-              </li>
-              <li>
                 <a href="/dashboard">Dashboard</a>
               </li>
               {/* <li>
-                <a href="/analytics">Analytics</a>
+                <a className="text-agGray">Analytics</a>
               </li> */}
               <li>
                 <a href="/nutrition">Nutrition</a>
-              </li>
-              <li>
-                <a href="/account">Profile</a>
               </li>
               <li>
                 <a
@@ -134,9 +122,6 @@ const Nav = () => {
                   Guide
                 </a>
               </li>
-              {/* <li>
-                <a href="/start">Getting Started</a>
-              </li> */}
               <li>
                 <ShareButton
                   title="Gambit Training App"
@@ -147,10 +132,35 @@ const Nav = () => {
             </ul>
           </div>
           <div className="navbar-end">
+            <div className="tooltip tooltip-bottom" data-tip="coming soon!">
+              <a>
+                <TbSquarePlus size="1.4rem" />
+              </a>
+            </div>
+            <div className="px-2 dropdown dropdown-end">
+              <label tabIndex={0} className="m-1 avatar placeholder">
+                <div className="w-8 rounded-full bg-neutral-focus text-neutral-content">
+                  <span className="text-xs">A</span>
+                </div>
+              </label>
+              <ul
+                tabIndex={0}
+                className="w-48 p-2 mt-3 shadow menu-compact dropdown-content menu bg-base-100 rounded-box"
+              >
+                <li>
+                  <a href="/account">Profile</a>
+                </li>
+                <li>
+                  <a onClick={handleSignOut}>Sign Out</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          {/* <div className="navbar-end">
             <a className="btn btn-outline" onClick={handleSignOut}>
               Sign Out
             </a>
-          </div>
+          </div> */}
         </div>
       )}
     </div>
