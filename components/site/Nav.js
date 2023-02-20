@@ -98,11 +98,14 @@ const Nav = () => {
                 <li>
                   <a href="/dashboard">Dashboard</a>
                 </li>
-                {/* <li>
-                  <a>Analytics</a>
-                </li> */}
                 <li>
                   <a href="/nutrition">Nutrition</a>
+                </li>
+                <li>
+                  <a className="text-borderGray">Analytics</a>
+                </li>
+                <li>
+                  <a className="text-borderGray">Leaderbord</a>
                 </li>
                 <li>
                   <a
@@ -134,11 +137,14 @@ const Nav = () => {
               <li>
                 <a href="/dashboard">Dashboard</a>
               </li>
-              {/* <li>
-                <a className="text-agGray">Analytics</a>
-              </li> */}
               <li>
                 <a href="/nutrition">Nutrition</a>
+              </li>
+              <li>
+                <a className="text-borderGray">Analytics</a>
+              </li>
+              <li>
+                <a className="text-borderGray">Leaderbord</a>
               </li>
               <li>
                 <a
@@ -160,7 +166,7 @@ const Nav = () => {
           </div>
           <div className="navbar-end">
             <div className="tooltip tooltip-bottom" data-tip="coming soon!">
-              <a href="/add">
+              <a>
                 <TbSquarePlus size="1.4rem" />
               </a>
             </div>
