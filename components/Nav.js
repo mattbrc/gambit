@@ -1,4 +1,5 @@
 import { useUser } from "@supabase/auth-helpers-react";
+import { useState, useEffect } from "react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
 import { TbSquarePlus } from "react-icons/tb";
@@ -7,11 +8,37 @@ const Nav = () => {
   const router = useRouter();
   const user = useUser();
   const supabase = useSupabaseClient();
+  const [name, setName] = useState("");
+
+  useEffect(() => {
+    getProfile();
+  }, [user]);
 
   const handleSignOut = () => {
     supabase.auth.signOut();
     router.push("/");
   };
+
+  async function getProfile() {
+    try {
+      let { data, error, status } = await supabase
+        .from("profiles")
+        .select("full_name")
+        .eq("id", user.id)
+        .single();
+
+      if (error && status !== 406) {
+        throw error;
+      }
+
+      if (data) {
+        setName(data.full_name);
+      }
+    } catch (error) {
+      // alert("Error loading user data!");
+      console.log(error);
+    }
+  }
 
   const ShareButton = ({ title, text, url }) => {
     const handleClick = () => {
@@ -140,7 +167,9 @@ const Nav = () => {
             <div className="px-2 dropdown dropdown-end">
               <label tabIndex={0} className="m-1 avatar placeholder">
                 <div className="w-8 rounded-full bg-neutral-focus text-neutral-content">
-                  <span className="text-xs">A</span>
+                  <span className="text-xs">
+                    {name ? name.charAt(0).toUpperCase() : ""}
+                  </span>
                 </div>
               </label>
               <ul

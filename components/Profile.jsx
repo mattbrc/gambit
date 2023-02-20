@@ -63,7 +63,7 @@ const SignupForm = ({ name, username, user, goals }) => {
                 name="name"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.name ? values.name : undefined}
+                value={values.name ? values.name : ""}
                 type="text"
                 className="max-w-xs input input-bordered" />
               <ErrorMessage name="name">{msg => <div className="pt-1 text-sm text-red-400">{msg}</div>}</ErrorMessage>
