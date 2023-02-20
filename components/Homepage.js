@@ -128,9 +128,9 @@ export default function Homepage({ session }) {
           <div>
             <div className="flex flex-col items-center my-6">
               <div className="border shadow-sm border-borderGray card w-80 bg-base-100">
-                <div className="absolute right-2 top-2">
+                {/* <div className="absolute right-2 top-2">
                   <EditButton />
-                </div>
+                </div> */}
                 <div className="justify-center mt-6 avatar placeholder">
                   <div className="w-16 rounded-full bg-neutral-focus text-neutral-content">
                     <span className="text-3xl">
